@@ -1,0 +1,31 @@
+---
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: prod
+    image: bizres-frontend:prod
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+
+  backend:
+    build:
+      context: ./backend
+      target: prod
+    image: bizres-backend:prod
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME:
+      DATABASE_HOST:
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME:
+      DATABASE_PASSWORD:
+      DATABASE_SSL: "false"
+    volumes:
+      - ./backend:/srv/app
+    ports:
+      - '1337:1337'

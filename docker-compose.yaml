@@ -1,0 +1,67 @@
+---
+version: '3.8'
+
+networks:
+  bizres-network:
+
+volumes:
+  db_data:
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    image: bizres-frontend:dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    networks:
+      - bizres-network
+    depends_on:
+      - backend
+      - postgres
+
+  backend:
+    build:
+      context: ./backend
+      target: dev
+    image: bizres-backend:dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: bizres_db
+      DATABASE_HOST: bizresdb
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: bizres_user
+      DATABASE_PASSWORD: bizres_pwd
+      DATABASE_SSL: "false"
+    volumes:
+      - ./backend:/srv/app
+    ports:
+      - '1337:1337'
+    networks:
+      - bizres-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: bizresdb
+    environment:
+      POSTGRES_DB: bizres_db
+      POSTGRES_USER: bizres_user
+      POSTGRES_PASSWORD: bizres_pwd
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - bizres-network
