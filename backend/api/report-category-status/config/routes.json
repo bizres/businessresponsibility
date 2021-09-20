@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/report-category-statuses",
+      "handler": "report-category-status.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/report-category-statuses/count",
+      "handler": "report-category-status.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/report-category-statuses/:id",
+      "handler": "report-category-status.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/report-category-statuses",
+      "handler": "report-category-status.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/report-category-statuses/:id",
+      "handler": "report-category-status.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/report-category-statuses/:id",
+      "handler": "report-category-status.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

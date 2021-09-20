@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "report_categories",
+  "info": {
+    "name": "ReportCategory"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "category_key": {
+      "type": "string"
+    },
+    "category_name": {
+      "type": "string"
+    },
+    "category_description": {
+      "type": "richtext"
+    },
+    "report_category_status": {
+      "via": "report_category",
+      "model": "report-category-status"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reports",
+  "info": {
+    "name": "Report",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "report_category_statuses": {
+      "collection": "report-category-status"
+    },
+    "company": {
+      "via": "reports",
+      "model": "company"
+    },
+    "metadata": {
+      "type": "json"
+    },
+    "pdf_url": {
+      "type": "string"
+    },
+    "year_published": {
+      "type": "date"
+    }
+  }
+}

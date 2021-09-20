@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "report_category_statuses",
+  "info": {
+    "name": "ReportCategoryStatus",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "report_category": {
+      "model": "report-category",
+      "via": "report_category_status"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "reported",
+        "not_reported",
+        "unknown"
+      ]
+    }
+  }
+}

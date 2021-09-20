@@ -13,6 +13,7 @@ services:
       context: ./frontend
       target: dev
     image: bizres-frontend:dev
+    container_name: bizres_frontend
     restart: unless-stopped
     environment:
       NODE_ENV: development
@@ -33,6 +34,7 @@ services:
       context: ./backend
       target: dev
     image: bizres-backend:dev
+    container_name: bizres_backend
     restart: unless-stopped
     environment:
       NODE_ENV: development
@@ -44,7 +46,7 @@ services:
       DATABASE_PASSWORD: bizres_pwd
       DATABASE_SSL: "false"
     volumes:
-      - ./backend:/srv/app
+      - ./backend:/usr/src/app
     ports:
       - '1337:1337'
     networks:
