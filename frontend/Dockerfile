@@ -1,4 +1,4 @@
-FROM node:12 AS base
+FROM node:16-alpine3.14 AS base
 
 ENV PORT 3000
 
@@ -8,27 +8,22 @@ WORKDIR /usr/src/app
 
 # Installing dependencies
 COPY package*.json /usr/src/app/
-RUN npm install
+COPY yarn.lock /usr/src/app/
+
+RUN yarn install
 
 # Copying source files
 COPY . /usr/src/app
 
 FROM base AS dev
 
-# Building app
-RUN npm run build
 EXPOSE 3000
-
-# Running the app
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]
 
 FROM base AS prod
 
 ENV NODE_ENV production
+RUN yarn build
 
-# Building app
-RUN npm run build
 EXPOSE 3000
-
-# Running the app
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
