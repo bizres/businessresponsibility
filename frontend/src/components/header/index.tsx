@@ -11,7 +11,7 @@ const Header = () => (
       <h1 className={tw(`font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-center leading-snug text-gray-800`)}>
         businessresponsibility.ch
       </h1>
-      <div className={tw(`max-w-xxl mx-auto`)}>
+      <div className={tw(`mx-auto`)}>
         <p className={tw(`mt-10 text-gray-500 text-center text-xl lg:text-3xl`)}>
           is a project to strengthen transparency and democratic control over the human rights performance of Swiss
           companies.

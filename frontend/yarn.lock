@@ -1318,10 +1318,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/node@14.14.28":
-  version "14.14.28"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.28.tgz#cade4b64f8438f588951a6b35843ce536853f25b"
-  integrity sha512-lg55ArB+ZiHHbBBttLpzD07akz0QPrZgUODNakeC09i62dnrywr9mFErHuaPlB6I7z+sEbK+IYmplahvplCj2g==
+"@types/node@16.10.1":
+  version "16.10.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.10.1.tgz#f3647623199ca920960006b3dccf633ea905f243"
+  integrity sha512-4/Z9DMPKFexZj/Gn3LylFgamNKHm4K3QDi0gz9B26Uk0c8izYf97B5fxfpspMNkWlFupblKM/nV8+NA9Ffvr+w==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -1350,21 +1350,13 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@17.0.24":
   version "17.0.24"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.24.tgz#7e1b3f78d0fc53782543f9bce6d949959a5880bd"
   integrity sha512-eIpyco99gTH+FTI3J7Oi/OH8MZoFMJuztNRimDOJwH4iGIsKV2qkGnk4M9VzlaVWeEEWLWSQRy0FEA0Kz218cg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@17.0.2":
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.2.tgz#3de24c4efef902dd9795a49c75f760cbe4f7a5a8"
-  integrity sha512-Xt40xQsrkdvjn1EyWe1Bc0dJLcil/9x2vAuW7ya+PuQip4UYUaXyhzWmAbwRsdMgwOFHpfp7/FFZebDU6Y8VHA==
-  dependencies:
-    "@types/prop-types" "*"
     csstype "^3.0.2"
 
 "@types/scheduler@*":
@@ -5561,10 +5553,10 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-typescript@4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.5.tgz#123a3b214aaff3be32926f0d8f1f6e704eb89a72"
-  integrity sha512-6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==
+typescript@4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
+  integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"

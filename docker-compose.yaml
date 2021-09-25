@@ -22,6 +22,7 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+      - /usr/src/app/.next
     working_dir: /usr/src/app
     networks:
       - bizres-network

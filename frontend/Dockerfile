@@ -1,4 +1,4 @@
-FROM node:16-alpine3.14 AS base
+FROM node:16 AS base
 
 ENV PORT 3000
 
@@ -17,8 +17,10 @@ COPY . /usr/src/app
 
 FROM base AS dev
 
+RUN yarn run build
 EXPOSE 3000
-CMD ["yarn", "dev"]
+
+CMD ["yarn", "run", "dev"]
 
 FROM base AS prod
 
