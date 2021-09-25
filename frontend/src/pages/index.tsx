@@ -1,31 +1,30 @@
-import { NextSeo } from 'next-seo';
+import {NextSeo} from 'next-seo';
 import Page from '@/components/page';
 import Header from '@/components/header';
 import VideoSection from '@/components/video-section';
-import ListSection from '@/components/list-section';
-import FeatureSection from '@/components/feature-section';
 import CasesSection from '@/components/cases-section';
-import SocialProof from '@/components/social-proof';
-import PricingTable from '@/components/pricing-table';
 import Footer from '@/components/footer';
+import Statistics from "@/components/statistics";
+import ListSection from "@/components/list-section";
 
 export default function Home() {
   return (
     <Page>
       <NextSeo
-        title="STARTD - Template"
-        description="A TypeScript/Next.js theme that includes everything you need to build amazing landing page!"
+        title="businessresponsibility.ch"
+        description="business responsibility is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies."
       />
-      <Header />
+      <Header/>
       <main>
-        <VideoSection />
+        <VideoSection/>
+        <Statistics/>
+        {/*<FeatureSection/>*/}
         <ListSection />
-        <FeatureSection />
-        <CasesSection />
-        <SocialProof />
-        <PricingTable />
+        <CasesSection/>
+        {/*<SocialProof/>*/}
+        {/*<PricingTable/>*/}
       </main>
-      <Footer />
+      <Footer/>
     </Page>
   );
 }
