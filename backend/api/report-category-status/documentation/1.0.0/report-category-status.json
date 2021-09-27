@@ -555,9 +555,6 @@
               "category_description": {
                 "type": "string"
               },
-              "report_category_status": {
-                "type": "string"
-              },
               "published_at": {
                 "type": "string"
               },

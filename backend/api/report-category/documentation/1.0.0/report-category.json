@@ -544,39 +544,6 @@
           "category_description": {
             "type": "string"
           },
-          "report_category_status": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "report_category": {
-                "type": "string"
-              },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "reported",
-                  "not_reported",
-                  "unknown"
-                ]
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -592,9 +559,6 @@
             "type": "string"
           },
           "category_description": {
-            "type": "string"
-          },
-          "report_category_status": {
             "type": "string"
           },
           "published_at": {

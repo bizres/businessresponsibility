@@ -19,10 +19,6 @@
     },
     "category_description": {
       "type": "richtext"
-    },
-    "report_category_status": {
-      "via": "report_category",
-      "model": "report-category-status"
     }
   }
 }

@@ -4,8 +4,15 @@ const REPORTS_QUERY = gql`
   query Report {
     reports {
       title,
+      company {
+        name
+      }
       report_category_statuses {
-        status
+        title,
+        status,
+        report_category {
+          category_key
+        }
       }
     }
   }

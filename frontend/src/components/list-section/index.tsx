@@ -1,6 +1,7 @@
 import {tw} from 'twind';
-import TableSvg from '@/constants/svg/table.svg';
 import Button from "@/components/button";
+import REPORTS_QUERY from "@/queries/reports/reports";
+import Query from "@/components/query/reports";
 
 const ListSection = () => (
   <section className={tw(`overflow-hidden`)}>
@@ -22,7 +23,50 @@ const ListSection = () => (
           <Button>Search</Button>
         </div>
         <div className={tw(`mt-2 pb-4 text-center`)}>
-          <TableSvg className={tw(``)}/>
+          <Query query={REPORTS_QUERY} reports="">
+            {({data: {reports}}) => {
+              console.log(reports);
+              return (
+                <table className={"w-full table-fixed"}>
+                  <thead>
+                  <tr className={tw(`h-40`)}>
+                    <th className={tw(`tw-1/2`)}>&nbsp;</th>
+                    <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Social concerns</th>
+                    <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Corruption</th>
+                    <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Employee concerns</th>
+                    <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Environment</th>
+                    <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Human rights</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {reports.map((item, i) => {
+                    return (
+                      <tr className={tw(`border-b-1 h-16`)}>
+                        <td className={tw(`text-left`)}>{item.company.name}</td>
+                        {item.report_category_statuses.map((it, idx) => {
+                          const bg = (it.status === 'not_reported') ? 'bg-red' : (it.status == 'reported') ? 'bg-green' : 'bg-gray'
+                          return (
+                            <td className={tw(`text-center`)}>
+                              <div className={tw(`m-auto rounded-full w-4 h-4 ${bg}-500`)}>&nbsp;</div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                  </tbody>
+                </table>
+              )
+            }}
+          </Query>
+          <div className={tw(`mt-12 pb-8 text-center`)}>
+            <span className={tw(`inline-block rounded-full w-6 h-6 bg-green-500`)}>&nbsp;</span>
+            <span className={tw(`p-6`)}>Reported</span>
+            <span className={tw(`inline-block rounded-full w-6 h-6 bg-gray-500`)}>&nbsp;</span>
+            <span className={tw(`p-6`)}>Unknown</span>
+            <span className={tw(`inline-block rounded-full w-6 h-6 bg-red-500`)}>&nbsp;</span>
+            <span className={tw(`p-6`)}>Not reported</span>
+          </div>
         </div>
       </div>
     </div>

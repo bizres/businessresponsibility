@@ -16,8 +16,7 @@
       "type": "string"
     },
     "report_category": {
-      "model": "report-category",
-      "via": "report_category_status"
+      "model": "report-category"
     },
     "status": {
       "type": "enumeration",
