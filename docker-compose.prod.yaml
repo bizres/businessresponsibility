@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: production
+      NEXT_PUBLIC_API_URL: https://admin.bizres.ch
 
   backend:
     build:

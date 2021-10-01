@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:1337
     ports:
       - 3000:3000
     volumes:
