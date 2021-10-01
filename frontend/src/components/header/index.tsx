@@ -13,8 +13,7 @@ const Header = () => (
       </h1>
       <div className={tw(`mx-auto`)}>
         <p className={tw(`mt-10 text-gray-500 text-center text-xl lg:text-3xl`)}>
-          is a project to strengthen transparency and democratic control over the human rights performance of Swiss
-          companies.
+          is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies.
         </p>
       </div>
     </div>

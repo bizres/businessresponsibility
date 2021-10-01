@@ -1,6 +1,7 @@
-import { tw } from 'twind';
-import { useState } from 'react';
+import {tw} from 'twind';
+import {useState} from 'react';
 import Button from '@/components/button';
+import Link from 'next/link'
 
 interface IMenuButton {
   toggleMenu: React.MouseEventHandler<HTMLButtonElement>;
@@ -15,34 +16,34 @@ type Link = {
 const links = [
   {
     label: `Info`,
-    href: `/`,
+    href: `/info`,
   },
   {
     label: `Team`,
-    href: `/`,
+    href: `/team`,
   },
   {
     label: `GitHub`,
-    href: `/`,
+    href: `/github`,
   },
   {
     label: `Contact`,
-    href: `/`,
+    href: `/contact`,
   },
 ];
 
 const secondaryLinks = [
   {
     label: `Log in`,
-    href: `/`,
+    href: `/login`,
   },
   {
     label: `Get Started`,
-    href: `/`,
+    href: `/get-started`,
   },
 ];
 
-const MenuButton = ({ toggleMenu, showMenu }: IMenuButton) => (
+const MenuButton = ({toggleMenu, showMenu}: IMenuButton) => (
   <button
     type="button"
     aria-controls="mobile-menu"
@@ -62,7 +63,7 @@ const MenuButton = ({ toggleMenu, showMenu }: IMenuButton) => (
         width={24}
         height={24}
       >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
       </svg>
     ) : (
       <svg
@@ -75,7 +76,7 @@ const MenuButton = ({ toggleMenu, showMenu }: IMenuButton) => (
         width={24}
         height={24}
       >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     )}
   </button>
@@ -93,13 +94,12 @@ const MobileMenu = () => (
     <div className={tw(`pt-4 pb-3 border-t border-gray-400`)}>
       <div className={tw(`px-2 space-y-1`)}>
         {secondaryLinks.map((link: Link) => (
-          <a
-            key={`mobile-${link.label}`}
-            href={link.href}
-            className={tw(`block px-3 py-2 text-base font-medium text-gray-500`)}
-          >
-            {link.label}
-          </a>
+          <Link key={`mobile-navi-${link.label}`} href={link.href}>
+            <a key={`mobile-${link.label}`}
+               className={tw(`block px-3 py-2 text-base font-medium text-gray-500`)}>
+              {link.label}
+            </a>
+          </Link>
         ))}
       </div>
     </div>
@@ -116,18 +116,17 @@ const Navigation = () => {
         <div className={tw(`flex items-center justify-between h-24`)}>
           <div className={tw(`flex items-center`)}>
             <div className={tw(`flex-shrink-0`)}>
-              <img className={tw(`h-12 w-12`)} src="logo.svg" alt="logo" width={48} height={48} />
+              <img className={tw(`h-12 w-12`)} src="logo.svg" alt="logo" width={48} height={48}/>
             </div>
             <div className={tw(`hidden md:block`)}>
               <div className={tw(`ml-10 flex items-baseline space-x-4`)}>
                 {links.map((link: Link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className={tw(`text-gray-500 hover:text-gray-600 px-3 py-2 rounded-md font-medium`)}
-                  >
-                    {link.label}
-                  </a>
+                  <Link key={`main-${link.label}`} href={link.href}>
+                    <a key={`navi-link-${link.label}`}
+                       className={tw(`text-gray-500 hover:text-gray-600 px-3 py-2 rounded-md font-medium`)}>
+                      {link.label}
+                    </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -139,11 +138,11 @@ const Navigation = () => {
             </div>
           </div>
           <div className={tw(`-mr-2 flex md:hidden`)}>
-            <MenuButton showMenu={showMenu} toggleMenu={toggleMenu} />
+            <MenuButton showMenu={showMenu} toggleMenu={toggleMenu}/>
           </div>
         </div>
       </div>
-      {showMenu ? <MobileMenu /> : null}
+      {showMenu ? <MobileMenu/> : null}
     </nav>
   );
 };

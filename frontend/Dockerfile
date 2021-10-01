@@ -20,7 +20,7 @@ FROM base AS dev
 RUN yarn run build
 EXPOSE 3000
 
-CMD ["yarn", "run", "dev"]
+CMD ["yarn", "dev"]
 
 FROM base AS prod
 

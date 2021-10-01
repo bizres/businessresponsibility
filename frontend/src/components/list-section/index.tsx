@@ -2,6 +2,7 @@ import {tw} from 'twind';
 import Button from "@/components/button";
 import REPORTS_QUERY from "@/queries/reports/reports";
 import Query from "@/components/query/reports";
+import Link from 'next/link'
 
 const ListSection = () => (
   <section className={tw(`overflow-hidden`)}>
@@ -25,7 +26,6 @@ const ListSection = () => (
         <div className={tw(`mt-2 pb-4 text-center`)}>
           <Query query={REPORTS_QUERY} reports="">
             {({data: {reports}}) => {
-              console.log(reports);
               return (
                 <table className={"w-full table-fixed"}>
                   <thead>
@@ -41,12 +41,16 @@ const ListSection = () => (
                   <tbody>
                   {reports.map((item, i) => {
                     return (
-                      <tr className={tw(`border-b-1 h-16`)}>
-                        <td className={tw(`text-left`)}>{item.company.name}</td>
+                      <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item.company.id}`}>
+                        <td className={tw(`text-left`)}>
+                          <Link key={`company-link-${item.company.id}`} href={`/company/${item.company.id}`}>
+                            <a className={tw(`text-blue-900 hover:text-blue-600`)}>{item.company.name}</a>
+                          </Link>
+                        </td>
                         {item.report_category_statuses.map((it, idx) => {
                           const bg = (it.status === 'not_reported') ? 'bg-red' : (it.status == 'reported') ? 'bg-green' : 'bg-gray'
                           return (
-                            <td className={tw(`text-center`)}>
+                            <td className={tw(`text-center`)} key={`td-${idx}`}>
                               <div className={tw(`m-auto rounded-full w-4 h-4 ${bg}-500`)}>&nbsp;</div>
                             </td>
                           );
