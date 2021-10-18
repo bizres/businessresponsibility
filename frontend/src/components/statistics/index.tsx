@@ -15,7 +15,7 @@ const options = {
     },
     legend: {
       display: true,
-      align: 'start',
+      align: 'start' as 'start',
       labels: {
         color: 'rgba(68,64,64,0.87)',
         padding: 24,
