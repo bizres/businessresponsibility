@@ -1,7 +1,6 @@
 import {NextSeo} from 'next-seo';
 import Page from '@/components/page';
 import Header from '@/components/header';
-import VideoSection from '@/components/video-section';
 import CasesSection from '@/components/cases-section';
 import Footer from '@/components/footer';
 import Statistics from "@/components/statistics";
@@ -16,7 +15,6 @@ export default function Home() {
       />
       <Header/>
       <main>
-        <VideoSection/>
         <Statistics/>
         {/*<FeatureSection/>*/}
         <ListSection />
