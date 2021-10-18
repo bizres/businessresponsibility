@@ -117,7 +117,7 @@ const Navigation = () => {
           <div className={tw(`flex items-center`)}>
             <div className={tw(`flex-shrink-0`)}>
               <a href={"/"} title={"Home"}>
-                <img className={tw(`h-12 w-12`)} src="logo.svg" alt="logo" width={48} height={48}/>
+                <img className={tw(`h-12 w-12`)} src="/logo.svg" alt="logo" width={48} height={48}/>
               </a>
             </div>
             <div className={tw(`hidden md:block`)}>
