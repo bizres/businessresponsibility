@@ -589,6 +589,9 @@
               }
             }
           },
+          "info_mail": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -626,6 +629,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "info_mail": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

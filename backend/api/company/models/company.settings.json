@@ -39,6 +39,9 @@
     "reports": {
       "via": "company",
       "collection": "report"
+    },
+    "info_mail": {
+      "type": "email"
     }
   }
 }
