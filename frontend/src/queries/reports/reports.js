@@ -7,7 +7,8 @@ const REPORTS_QUERY = gql`
       company {
         id,
         name,
-        name_clean
+        name_clean,
+        url_fixed,
       }
       report_category_statuses {
         title,
