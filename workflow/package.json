@@ -1,0 +1,11 @@
+{
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flows.json",
+            "credentialsFile": "flows_cred.json"
+        }
+    },
+    "description": "Node-RED flow",
+    "version": "0.0.1"
+}

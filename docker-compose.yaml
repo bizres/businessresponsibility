@@ -69,3 +69,13 @@ services:
       - '5432:5432'
     networks:
       - bizres-network
+
+  node-red-service:
+    build:
+      context: ./workflow
+    image: bizres-workflow
+    container_name: bizres_worklow
+    ports:
+      - "9880:1880"
+    environment:
+      - NODE_RED_ENABLE_PROJECTS=true  # must be set to true if you want to modify the node-red flow files through node-red editor

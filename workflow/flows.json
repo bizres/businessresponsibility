@@ -1,0 +1,55 @@
+[
+    {
+        "id": "98f04e36.3a6d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ee116574.f1f048",
+        "type": "inject",
+        "z": "98f04e36.3a6d",
+        "name": "set startup message",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "The Node-red flow is successfully started if you see this message in the system console !",
+        "payloadType": "str",
+        "x": 180,
+        "y": 40,
+        "wires": [
+            [
+                "6c5aa1bc.4a843"
+            ]
+        ]
+    },
+    {
+        "id": "6c5aa1bc.4a843",
+        "type": "debug",
+        "z": "98f04e36.3a6d",
+        "name": "write startup message to console.",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 40,
+        "wires": []
+    }
+]
