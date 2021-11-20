@@ -1,17 +1,11 @@
 import { tw } from 'twind';
 import Button from '@/components/button';
 
-const productLinks = [`Features`, `Customers`, `Platform`, `Pricing`, `Enterprise`, `What's new?`];
-const aboutLinks = [`About Us`, `Careers`, `Leadership`, `Blog`, `Events`, `Press`];
+const aboutLinks = [`About Us`, `Careers`, `Blog`, `Press`];
 const resourceLinks = [
-  `Get started`,
   `Guides`,
-  `Tools`,
   `Case studies`,
-  `Solutions`,
   `FAQs`,
-  `Help Center`,
-  `Training`,
   `Other resources`,
 ];
 
@@ -24,18 +18,6 @@ const Footer = () => (
       </div>
       <div className={tw(`w-full lg:w-1/2`)}>
         <ul className={tw(`text-lg font-light flex flex-wrap w-full`)}>
-          <li className={tw(`w-1/2 md:w-1/3 lg:w-1/3`)}>
-            <div>
-              <h4 className={tw(`text-gray-900 text-base font-bold mb-1`)}>Product</h4>
-              <ul>
-                {productLinks.map((link) => (
-                  <li className={tw(`text-gray-800 text-sm font-medium leading-6`)} key={link}>
-                    <a href="/">{link}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </li>
           <li className={tw(`w-1/2 md:w-1/3 lg:w-1/3`)}>
             <div>
               <h4 className={tw(`text-gray-900 text-base font-bold mb-1`)}>Resources</h4>

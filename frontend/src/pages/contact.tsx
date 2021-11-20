@@ -1,8 +1,6 @@
 import Page from '@/components/page';
 import Footer from '@/components/footer';
-import ListDetailSection from "@/components/list-section/details";
 import {tw} from "twind";
-import Check from "@/constants/svg/check.svg";
 
 export default function Index() {
   return (

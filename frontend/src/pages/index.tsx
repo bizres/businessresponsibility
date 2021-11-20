@@ -1,7 +1,6 @@
 import {NextSeo} from 'next-seo';
 import Page from '@/components/page';
 import Header from '@/components/header';
-import CasesSection from '@/components/cases-section';
 import Footer from '@/components/footer';
 import Statistics from "@/components/statistics";
 import ListSection from "@/components/list-section/airtable";
@@ -16,11 +15,7 @@ export default function Home() {
       <Header/>
       <main>
         <Statistics/>
-        {/*<FeatureSection/>*/}
         <ListSection />
-        <CasesSection/>
-        {/*<SocialProof/>*/}
-        {/*<PricingTable/>*/}
       </main>
       <Footer/>
     </Page>
