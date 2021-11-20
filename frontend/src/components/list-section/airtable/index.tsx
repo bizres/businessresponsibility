@@ -4,28 +4,64 @@ import Button from '@/components/button';
 import Link from 'next/link';
 import getConfig from 'next/config'
 
-const { publicRuntimeConfig } = getConfig()
-const apiKey = publicRuntimeConfig ?  publicRuntimeConfig.airtableApiKey : "";
+const {publicRuntimeConfig} = getConfig()
+const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
 const table = 'ReportingPeriods';
 const view = 'Frontend';
 const base = 'app4bIWfizNSxH4Ik'
-const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=100&view=${view}&api_key=${apiKey}`;
+const baseUrl = `https://api.airtable.com/v0/${base}/${table}?maxRecords=100&view=${view}&api_key=${apiKey}`;
 
 const ListSection = () => {
   const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
   const [reportRecords, setReportRecords] = useState([]);
+  const [yearFilter, setYearFilter] = useState("");
+  const [companyNameFilter, setCompanyNameFilter] = useState("");
+  const [url, setUrl] = useState(baseUrl);
 
-  useEffect(() => {
+  const handleKeyPress = (event) => {
+    if (event.key == "Enter") {
+      handleSearch(event);
+    }
+  }
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    let companyName = companyNameFilter.trim().toLowerCase();
+    let year = (yearFilter == "") ? "" : `Year="${yearFilter}"`
+    let company = (companyName == "") ? "" : `FIND("${companyName}", LOWER({Company})) >= 1`;
+
+    let searchFilter = '';
+    if (yearFilter !== "" && companyName !== "") {
+      searchFilter = `&filterByFormula=AND(${year}, ${company})`;
+    } else if (yearFilter != "") {
+      searchFilter = `&filterByFormula=AND(${year})`;
+    } else if (companyName != "") {
+      searchFilter = `&filterByFormula=AND(${company})`;
+    }
+
+    loadReportList(baseUrl + searchFilter);
+  }
+
+  const loadReportList = (url) => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.records);
         setReportRecords(data.records);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  useEffect(() => {
+    loadReportList(url);
   }, []);
+
+  const noReports = (
+    reportRecords == undefined ||
+    !reportRecords ||
+    (Array.isArray(reportRecords) && reportRecords.length == 0)
+  );
 
   return (
     <section className={tw(`overflow-hidden`)}>
@@ -43,8 +79,23 @@ const ListSection = () => {
               type="text"
               className={tw(`border border-gray-300 bg-gray-100 min-w-0 w-full rounded text-gray-800 py-2 px-3 mr-2`)}
               placeholder="Search company reports"
+              onChange={event => setCompanyNameFilter(event.target.value)}
+              onKeyPress={handleKeyPress}
             />
-            <Button>Search</Button>
+            <select
+              className={tw(`font-sans font-medium py-2 px-2 mx-4 border rounded bg-white text-gray-600 border-gray-300 hover:bg-gray-100`)}
+              onChange={event => setYearFilter(event.target.value)}
+              defaultValue={""}
+            >
+              <option value="">&nbsp;</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2019">2017</option>
+              <option value="2016">2016</option>
+            </select>
+            <Button primary={true} onClick={handleSearch}>Search</Button>
           </div>
           <div className={tw(`mt-2 pb-4 text-center`)}>
             <table className="w-full table-fixed">
@@ -59,25 +110,40 @@ const ListSection = () => {
               </tr>
               </thead>
               <tbody>
-              {reportRecords.map((item) => (
-                <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item.id}`}>
-                  <td className={tw(`text-left`)}>
-                    <Link key={`company-link-${item.fields['Company']}`} href={`/company/${item.fields['Company']}`}>
-                      <a className={tw(`text-blue-900 hover:text-blue-600`)}>
-                        {item.fields[`CompanyName (from Company)`]}
-                      </a>
-                    </Link>
-                  </td>
-                  {status.map((it, idx) => {
-                    const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
-                    return (
-                      <td className={tw(`text-center`)} key={`td-${idx}`}>
-                        <div className={tw(`m-auto rounded-full w-4 h-4 ${bg}-500`)}>&nbsp;</div>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
+              {
+                noReports
+                  ?
+                  <tr>
+                    <td colSpan={6} className={tw(`text-base text-2xl text-indigo-900 text-left`)}>
+                      Sorry, we couldn't find any reports... 😥
+                    </td>
+                  </tr>
+                  :
+                  <>
+                    {
+                      reportRecords.map((item) => (
+                        <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item.id}`}>
+                          <td className={tw(`text-left`)}>
+                            <Link key={`company-link-${item.fields['Company']}`}
+                                  href={`/company/${item.fields['Company']}`}>
+                              <a className={tw(`text-blue-900 hover:text-blue-600`)}>
+                                {item.fields[`CompanyName`]}
+                              </a>
+                            </Link>
+                          </td>
+                          {status.map((it, idx) => {
+                            const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
+                            return (
+                              <td className={tw(`text-center`)} key={`td-${idx}`}>
+                                <div className={tw(`m-auto rounded-full w-4 h-4 ${bg}-500`)}>&nbsp;</div>
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))
+                    }
+                  </>
+              }
               </tbody>
             </table>
             <div className={tw(`mt-12 pb-8 text-center`)}>
