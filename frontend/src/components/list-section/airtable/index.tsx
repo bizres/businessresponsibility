@@ -9,7 +9,7 @@ const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
 const table = 'ReportingPeriods';
 const view = 'Frontend';
 const base = 'app4bIWfizNSxH4Ik'
-const baseUrl = `https://api.airtable.com/v0/${base}/${table}?maxRecords=100&view=${view}&api_key=${apiKey}`;
+const baseUrl = `https://api.airtable.com/v0/${base}/${table}?maxRecords=100&view=${view}`;
 
 const ListSection = () => {
   const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
@@ -43,7 +43,12 @@ const ListSection = () => {
   }
 
   const loadReportList = (url) => {
-    fetch(url)
+    const options = {
+      headers: {
+        Authorization: `Bearer ${apiKey}`
+      }
+    };
+    fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
         setReportRecords(data.records);

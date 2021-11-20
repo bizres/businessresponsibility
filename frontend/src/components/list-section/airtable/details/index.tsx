@@ -26,8 +26,13 @@ const ListDetailSection = () => {
 
   useEffect(() => {
     if (id !== undefined) {
-      const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=${maxRecords}&view=${view}&api_key=${apiKey}&filterByFormula=AND(CompanyId="${id}",Approved=1)`;
-      fetch(url)
+      const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=${maxRecords}&view=${view}&filterByFormula=AND(CompanyId="${id}",Approved=1)`;
+      const options = {
+        headers: {
+          Authorization: `Bearer ${apiKey}`
+        }
+      };
+      fetch(url, options)
         .then((res) => res.json())
         .then((data) => {
           setCrawlResult(data);
@@ -59,6 +64,7 @@ const ListDetailSection = () => {
           <table className={"w-full table-fixed"}>
             <thead>
             <tr className={tw(`h-40`)}>
+              <th className={tw(`tw-1/8`)}>&nbsp;</th>
               <th className={tw(`tw-1/4`)}>&nbsp;</th>
               <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Social concerns</th>
               <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Corruption</th>
@@ -70,7 +76,8 @@ const ListDetailSection = () => {
             <tbody>
             {records.map((record, i) => {
               const item = record.fields;
-              console.log(">>> item: ", item);
+              const pdfUrl = item['PDF'][0]['thumbnails']['large']['url']
+
               return (
                 <>
                   <tr>
@@ -78,12 +85,22 @@ const ListDetailSection = () => {
                       <span className={tw(`text-3xl font-bold text-blue-900`)}>{item['Year']}</span>
                     </td>
                   </tr>
-                  <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item['uri']}`}>
+                  <tr className={tw(`border-b-1 h-24`)} key={`company-item-${item['uri']}`}>
                     <td className={tw(`text-left`)}>
                       <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
                         <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
                            target={"_blank"}>
-                          {item['Type']}
+                          <div className={tw(`inline-block align-middle`)}>
+                            <img className={tw(`h-20`)} src={pdfUrl} alt={item['Type']}/>
+                          </div>
+                        </a>
+                      </Link>
+                    </td>
+                    <td className={tw(`text-left`)}>
+                      <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
+                        <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
+                           target={"_blank"}>
+                          <div className={tw(`inline-block pl-4 align-middle`)}>{item['Type']}</div>
                         </a>
                       </Link>
                     </td>
@@ -102,6 +119,14 @@ const ListDetailSection = () => {
             </tbody>
           </table>
         </>
+        <div className={tw(`mt-12 pb-8 text-center`)}>
+          <span className={tw(`inline-block rounded-full w-6 h-6 bg-green-500`)}>&nbsp;</span>
+          <span className={tw(`p-6`)}>Reported</span>
+          <span className={tw(`inline-block rounded-full w-6 h-6 bg-gray-500`)}>&nbsp;</span>
+          <span className={tw(`p-6`)}>Unknown</span>
+          <span className={tw(`inline-block rounded-full w-6 h-6 bg-red-500`)}>&nbsp;</span>
+          <span className={tw(`p-6`)}>Not reported</span>
+        </div>
         <div className={tw(`float-right m-8`)}>
           <Link href={"/"}>
             <Button primary>Back to reports</Button>
