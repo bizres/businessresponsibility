@@ -4,7 +4,7 @@ import Header from '@/components/header';
 import CasesSection from '@/components/cases-section';
 import Footer from '@/components/footer';
 import Statistics from "@/components/statistics";
-import ListSection from "@/components/list-section";
+import ListSection from "@/components/list-section/airtable";
 
 export default function Home() {
   return (
