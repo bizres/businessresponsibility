@@ -24,6 +24,16 @@ docker-compose up
 
 **Backend**: http://localhost:1337/admin
 
+### Development configuration
+
+#### Frontend
+
+- Create a file containing the environment variables for development:
+```
+$:> cat ./frontend/.env.local
+AIRTABLE_API_KEY=<ADD_HERE_AIRTABLE_API_KEY>
+```
+
 # Production
 
 Building and deploying Docker container images:
