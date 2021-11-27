@@ -92,7 +92,7 @@ const ListSection = () => {
               onChange={event => setYearFilter(event.target.value)}
               defaultValue={""}
             >
-              <option value="">&nbsp;</option>
+              <option value="">Year</option>
               <option value="2022">2022</option>
               <option value="2021">2021</option>
               <option value="2020">2020</option>
@@ -137,10 +137,11 @@ const ListSection = () => {
                             </Link>
                           </td>
                           {status.map((it, idx) => {
-                            const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
+                            //const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
+                            const bg = (item.fields[it]=== `1`) ? `w-4 h-4 bg-blue-500` : `w-2 h-2 bg-gray-300`;
                             return (
                               <td className={tw(`text-center`)} key={`td-${idx}`}>
-                                <div className={tw(`m-auto rounded-full w-4 h-4 ${bg}-500`)}>&nbsp;</div>
+                                <div className={tw(`m-auto rounded-full ${bg}`)}>&nbsp;</div>
                               </td>
                             );
                           })}
@@ -152,12 +153,10 @@ const ListSection = () => {
               </tbody>
             </table>
             <div className={tw(`mt-12 pb-8 text-center`)}>
-              <span className={tw(`inline-block rounded-full w-6 h-6 bg-green-500`)}>&nbsp;</span>
-              <span className={tw(`p-6`)}>Reported</span>
-              <span className={tw(`inline-block rounded-full w-6 h-6 bg-gray-500`)}>&nbsp;</span>
-              <span className={tw(`p-6`)}>Unknown</span>
-              <span className={tw(`inline-block rounded-full w-6 h-6 bg-red-500`)}>&nbsp;</span>
-              <span className={tw(`p-6`)}>Not reported</span>
+              <span className={tw(`inline-block rounded-full w-6 h-6 bg-blue-500`)}>&nbsp;</span>
+              <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
+              <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
+              <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>
             </div>
           </div>
         </div>

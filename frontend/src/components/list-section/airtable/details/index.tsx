@@ -47,8 +47,11 @@ const ListDetailSection = () => {
   if (records == undefined || !Array.isArray(records) || records.length == 0) {
     return (<div>&nbsp;</div>);
   }
-  const company = records[0]['fields']['Company'][0];
+  const company = records[0]['fields']['CompanyName (from Companies)'][0];
   const companyUrl = records[0]['fields']['CompanyURL'][0];
+  const reportingYear = records[0]['fields']['Year (from RP)'][0];
+  const size = 'Unknown';
+  const sector = 'Unknown';
 
   return (
     <section className={tw(`overflow-hidden`)}>
@@ -58,9 +61,14 @@ const ListDetailSection = () => {
           <p>
             <a href={`//${companyUrl}`}
                className={tw(`font-bold text-blue-900 hover:text-blue-600`)} target={"_blank"}>
-              {`${company}`}
+              {`${companyUrl}`}
             </a>
           </p>
+          <ul className={tw(`list-disc list-inside pt-4 `)}>
+            <li>Reporting Year: {`${reportingYear}`}</li>
+            <li>Size: {`${size}`}</li>
+            <li>Sector: {`${sector}`}</li>
+          </ul>
           <table className={"w-full table-fixed"}>
             <thead>
             <tr className={tw(`h-40`)}>
@@ -76,7 +84,10 @@ const ListDetailSection = () => {
             <tbody>
             {records.map((record, i) => {
               const item = record.fields;
-              const pdfUrl = item['PDF'][0]['thumbnails']['large']['url']
+              let pdfThumbnail = '';
+              if (item.hasOwnProperty('PDF') && item['PDF'].length > 0 && item['PDF'][0].hasOwnProperty('thumbnails')) {
+                pdfThumbnail = item['PDF'][0]['thumbnails']['large']['url']
+              }
 
               return (
                 <>
@@ -88,27 +99,30 @@ const ListDetailSection = () => {
                   <tr className={tw(`border-b-1 h-24`)} key={`company-item-${item['uri']}`}>
                     <td className={tw(`text-left`)}>
                       <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
-                        <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
+                        <a className={tw(`text-blue-900 hover:text-blue-600`)} title={item['Title']}
                            target={"_blank"}>
-                          <div className={tw(`inline-block align-middle`)}>
-                            <img className={tw(`h-20`)} src={pdfUrl} alt={item['Type']}/>
-                          </div>
+                          <div className={tw(`inline-block align-middle`)}>{item['Type']}</div>
                         </a>
                       </Link>
                     </td>
                     <td className={tw(`text-left`)}>
-                      <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
-                        <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
-                           target={"_blank"}>
-                          <div className={tw(`inline-block pl-4 align-middle`)}>{item['Type']}</div>
-                        </a>
-                      </Link>
+                      {pdfThumbnail == '' ? (<></>)
+                        : (
+                          <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
+                            <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
+                               target={"_blank"}>
+                              <div className={tw(`inline-block align-middle`)}>
+                                <img className={tw(`h-20`)} src={pdfThumbnail} alt={item['Type']}/>
+                              </div>
+                            </a>
+                          </Link>)
+                      }
                     </td>
                     {status.map((it, idx) => {
-                      const bg = item[it] === `0` ? `bg-red` : item[it] === `1` ? `bg-green` : `bg-gray`;
+                      const bg = (item[it] === `1`) ? `w-4 h-4 bg-blue-500` : `w-2 h-2 bg-gray-300`;
                       return (
                         <td className={tw(`text-center`)} key={`td-${idx}`}>
-                          <div className={tw(`m-auto rounded-full w-4 h-4 ${bg}-500`)}>&nbsp;</div>
+                          <div className={tw(`m-auto rounded-full  ${bg}`)}>&nbsp;</div>
                         </td>
                       );
                     })}
@@ -120,12 +134,10 @@ const ListDetailSection = () => {
           </table>
         </>
         <div className={tw(`mt-12 pb-8 text-center`)}>
-          <span className={tw(`inline-block rounded-full w-6 h-6 bg-green-500`)}>&nbsp;</span>
-          <span className={tw(`p-6`)}>Reported</span>
-          <span className={tw(`inline-block rounded-full w-6 h-6 bg-gray-500`)}>&nbsp;</span>
-          <span className={tw(`p-6`)}>Unknown</span>
-          <span className={tw(`inline-block rounded-full w-6 h-6 bg-red-500`)}>&nbsp;</span>
-          <span className={tw(`p-6`)}>Not reported</span>
+          <span className={tw(`inline-block rounded-full w-6 h-6 bg-blue-500`)}>&nbsp;</span>
+          <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
+          <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
+          <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>
         </div>
         <div className={tw(`float-right m-8`)}>
           <Link href={"/"}>
