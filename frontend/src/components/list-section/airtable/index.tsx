@@ -6,6 +6,10 @@ import getConfig from 'next/config'
 
 const {publicRuntimeConfig} = getConfig()
 const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
+const defaultYear = "2020";
+const defaultFilter = `&filterByFormula=AND(Year="${defaultYear}")`
+
+// Airtable configuration
 const table = 'ReportingPeriods';
 const view = 'Frontend';
 const base = 'app4bIWfizNSxH4Ik'
@@ -14,9 +18,9 @@ const baseUrl = `https://api.airtable.com/v0/${base}/${table}?maxRecords=100&vie
 const ListSection = () => {
   const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
   const [reportRecords, setReportRecords] = useState([]);
-  const [yearFilter, setYearFilter] = useState("");
+  const [yearFilter, setYearFilter] = useState(defaultYear);
   const [companyNameFilter, setCompanyNameFilter] = useState("");
-  const [url, setUrl] = useState(baseUrl);
+  const [url, setUrl] = useState(baseUrl + defaultFilter);
 
   const handleKeyPress = (event) => {
     if (event.key == "Enter") {
@@ -90,15 +94,9 @@ const ListSection = () => {
             <select
               className={tw(`font-sans font-medium py-2 px-2 mx-4 border rounded bg-white text-gray-600 border-gray-300 hover:bg-gray-100`)}
               onChange={event => setYearFilter(event.target.value)}
-              defaultValue={""}
+              defaultValue={"2020"}
             >
-              <option value="">Year</option>
-              <option value="2022">2022</option>
-              <option value="2021">2021</option>
               <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2019">2017</option>
-              <option value="2016">2016</option>
             </select>
             <Button primary={true} onClick={handleSearch}>Search</Button>
           </div>
