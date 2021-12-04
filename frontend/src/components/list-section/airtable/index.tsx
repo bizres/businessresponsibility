@@ -5,22 +5,31 @@ import Link from 'next/link';
 import getConfig from 'next/config'
 
 const {publicRuntimeConfig} = getConfig()
-const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
+// Filtering and pagination params
 const defaultYear = "2020";
-const defaultFilter = `&filterByFormula=AND(Year="${defaultYear}")`
+const defaultFilter = `&filterByFormula=AND(Year="${defaultYear}")`;
+const pageSize = 10;
+const sort = "&sort[0][field]=CompanyName&sort[0][direction]=asc";
 
 // Airtable configuration
+const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
 const table = 'ReportingPeriods';
 const view = 'Frontend';
 const base = 'app4bIWfizNSxH4Ik'
-const baseUrl = `https://api.airtable.com/v0/${base}/${table}?maxRecords=100&view=${view}`;
+const baseUrl = `https://api.airtable.com/v0/${base}/${table}?pageSize=${pageSize}&view=${view}${sort}`;
 
 const ListSection = () => {
+
   const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
-  const [reportRecords, setReportRecords] = useState([]);
+  const [reportRecords, setReportRecords] = useState(null);
   const [yearFilter, setYearFilter] = useState(defaultYear);
   const [companyNameFilter, setCompanyNameFilter] = useState("");
-  const [url, setUrl] = useState(baseUrl + defaultFilter);
+  const [offset, setOffset] = useState(null);
+  const getOffsetFilter = () => {
+    return (offset !== null && offset !== undefined) ? `&offset=${offset}` : '';
+  }
+  const [url, setUrl] = useState(baseUrl + defaultFilter + getOffsetFilter());
+
 
   const handleKeyPress = (event) => {
     if (event.key == "Enter") {
@@ -28,11 +37,10 @@ const ListSection = () => {
     }
   }
 
-  const handleSearch = (event) => {
-    event.preventDefault();
+  const getUriWithSearchParams = () => {
     let companyName = companyNameFilter.trim().toLowerCase();
     let year = (yearFilter == "") ? "" : `Year="${yearFilter}"`
-    let company = (companyName == "") ? "" : `FIND("${companyName}", LOWER({Company})) >= 1`;
+    let company = (companyName == "") ? "" : `FIND("${companyName}", LOWER({Name})) >= 1`;
 
     let searchFilter = '';
     if (yearFilter !== "" && companyName !== "") {
@@ -42,8 +50,19 @@ const ListSection = () => {
     } else if (companyName != "") {
       searchFilter = `&filterByFormula=AND(${company})`;
     }
+    return baseUrl + searchFilter;
+  }
 
-    loadReportList(baseUrl + searchFilter);
+  const handleSearch = (event) => {
+    event.preventDefault();
+    loadReportList(getUriWithSearchParams());
+  }
+
+  const handleNextPage = (event) => {
+    event.preventDefault();
+    const uri = getUriWithSearchParams();
+    const offset = getOffsetFilter();
+    loadReportList(uri + offset);
   }
 
   const loadReportList = (url) => {
@@ -55,6 +74,8 @@ const ListSection = () => {
     fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
+        const offset = data.hasOwnProperty('offset') ? data['offset'] : null;
+        setOffset(offset);
         setReportRecords(data.records);
       })
       .catch((error) => {
@@ -66,8 +87,8 @@ const ListSection = () => {
     loadReportList(url);
   }, []);
 
+  const loading = reportRecords === null || reportRecords == undefined;
   const noReports = (
-    reportRecords == undefined ||
     !reportRecords ||
     (Array.isArray(reportRecords) && reportRecords.length == 0)
   );
@@ -87,7 +108,7 @@ const ListSection = () => {
               aria-label="search reports"
               type="text"
               className={tw(`border border-gray-300 bg-gray-100 min-w-0 w-full rounded text-gray-800 py-2 px-3 mr-2`)}
-              placeholder="Search company reports"
+              placeholder="Enter a company name"
               onChange={event => setCompanyNameFilter(event.target.value)}
               onKeyPress={handleKeyPress}
             />
@@ -114,39 +135,45 @@ const ListSection = () => {
               </thead>
               <tbody>
               {
-                noReports
-                  ?
+                loading ?
                   <tr>
                     <td colSpan={6} className={tw(`text-base text-2xl text-indigo-900 text-left`)}>
-                      Sorry, we couldn't find any reports... 😥
+                      Loading data...
                     </td>
-                  </tr>
-                  :
-                  <>
-                    {
-                      reportRecords.map((item) => (
-                        <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item.id}`}>
-                          <td className={tw(`text-left`)}>
-                            <Link key={`company-link-${item.fields['Company']}`}
-                                  href={`/company/${item.fields['Company']}`}>
-                              <a className={tw(`text-blue-900 hover:text-blue-600`)}>
-                                {item.fields[`CompanyName`]}
-                              </a>
-                            </Link>
-                          </td>
-                          {status.map((it, idx) => {
-                            //const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
-                            const bg = (item.fields[it]=== `1`) ? `w-4 h-4 bg-blue-500` : `w-2 h-2 bg-gray-300`;
-                            return (
-                              <td className={tw(`text-center`)} key={`td-${idx}`}>
-                                <div className={tw(`m-auto rounded-full ${bg}`)}>&nbsp;</div>
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      ))
-                    }
-                  </>
+                  </tr> :
+                  noReports
+                    ?
+                    <tr>
+                      <td colSpan={6} className={tw(`text-base text-2xl text-indigo-900 text-left`)}>
+                        Sorry, we couldn't find any reports... 😥
+                      </td>
+                    </tr>
+                    :
+                    <>
+                      {
+                        reportRecords.map((item) => (
+                          <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item.id}`}>
+                            <td className={tw(`text-left`)}>
+                              <Link key={`company-link-${item.fields['Company']}`}
+                                    href={`/company/${item.fields['Company']}`}>
+                                <a className={tw(`text-blue-900 hover:text-blue-600`)}>
+                                  {item.fields[`CompanyName`]}
+                                </a>
+                              </Link>
+                            </td>
+                            {status.map((it, idx) => {
+                              //const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
+                              const bg = (item.fields[it] === `1`) ? `w-4 h-4 bg-blue-500` : `w-2 h-2 bg-gray-300`;
+                              return (
+                                <td className={tw(`text-center`)} key={`td-${idx}`}>
+                                  <div className={tw(`m-auto rounded-full ${bg}`)}>&nbsp;</div>
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        ))
+                      }
+                    </>
               }
               </tbody>
             </table>
@@ -155,6 +182,11 @@ const ListSection = () => {
               <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
               <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
               <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>
+            </div>
+            <div className={tw(`text-right`)}>
+              <div>{offset !== null ? <Button primary={true} onClick={handleNextPage}>Show next page</Button> :
+                <Button primary={true} onClick={handleNextPage}>Goto first page</Button>}
+              </div>
             </div>
           </div>
         </div>
