@@ -7,7 +7,6 @@ import Button from "@/components/button";
 
 import React, {useEffect, useState} from 'react';
 import getConfig from 'next/config'
-import {isNumericLiteral} from "tsutils";
 
 const {publicRuntimeConfig} = getConfig();
 const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
@@ -15,6 +14,7 @@ const table = 'CrawlResults';
 const view = 'Frontend';
 const base = 'app4bIWfizNSxH4Ik';
 const maxRecords = 100;
+const sort = "&sort[0][field]=Year&sort[0][direction]=desc";
 
 
 const ListDetailSection = () => {
@@ -26,7 +26,7 @@ const ListDetailSection = () => {
 
   useEffect(() => {
     if (id !== undefined) {
-      const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=${maxRecords}&view=${view}&filterByFormula=AND(CompanyId="${id}",Approved=1)`;
+      const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=${maxRecords}&view=${view}${sort}&filterByFormula=AND(CompanyId="${id}",Screened=1)`;
       const options = {
         headers: {
           Authorization: `Bearer ${apiKey}`
@@ -47,11 +47,12 @@ const ListDetailSection = () => {
   if (records == undefined || !Array.isArray(records) || records.length == 0) {
     return (<div>&nbsp;</div>);
   }
-  const company = records[0]['fields']['CompanyName (from Companies)'][0];
+  const company = records[0]['fields']['CompanyName'][0];
   const companyUrl = records[0]['fields']['CompanyURL'][0];
   const reportingYear = records[0]['fields']['Year (from RP)'][0];
   const size = 'Unknown';
   const sector = 'Unknown';
+  let prevYear = null;
 
   return (
     <section className={tw(`overflow-hidden`)}>
@@ -84,6 +85,14 @@ const ListDetailSection = () => {
             <tbody>
             {records.map((record, i) => {
               const item = record.fields;
+              const year = item['Year'];
+              const pdfUrl = item['GS link']
+
+              const previousYear = prevYear;
+              prevYear = year;
+              const isYearChanged = (previousYear !== null && year == previousYear);
+              console.log(">> year, previous, prev: ", year, previousYear, prevYear)
+
               let pdfThumbnail = '';
               if (item.hasOwnProperty('PDF') && item['PDF'].length > 0 && item['PDF'][0].hasOwnProperty('thumbnails')) {
                 pdfThumbnail = item['PDF'][0]['thumbnails']['large']['url']
@@ -91,14 +100,18 @@ const ListDetailSection = () => {
 
               return (
                 <>
-                  <tr>
-                    <td colSpan={4}>
-                      <span className={tw(`text-3xl font-bold text-blue-900`)}>{item['Year']}</span>
-                    </td>
-                  </tr>
+                  { isYearChanged ? (<></>) :
+                  (
+                    <tr className={tw(`pt-8 block`)}>
+                      <td colSpan={4}>
+                        <span className={tw(`text-3xl font-bold text-blue-900`)}>{year}</span>
+                      </td>
+                    </tr>
+                    )
+                  }
                   <tr className={tw(`border-b-1 h-24`)} key={`company-item-${item['uri']}`}>
                     <td className={tw(`text-left`)}>
-                      <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
+                      <Link key={`report-link-${pdfUrl}`} href={`${pdfUrl}`}>
                         <a className={tw(`text-blue-900 hover:text-blue-600`)} title={item['Title']}
                            target={"_blank"}>
                           <div className={tw(`inline-block align-middle`)}>{item['Type']}</div>
@@ -108,11 +121,11 @@ const ListDetailSection = () => {
                     <td className={tw(`text-left`)}>
                       {pdfThumbnail == '' ? (<></>)
                         : (
-                          <Link key={`report-link-${item['URL']}`} href={`${item['URL']}`}>
+                          <Link key={`report-link-${pdfUrl}`} href={`${pdfUrl}`}>
                             <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
                                target={"_blank"}>
-                              <div className={tw(`inline-block align-middle`)}>
-                                <img className={tw(`h-20`)} src={pdfThumbnail} alt={item['Type']}/>
+                              <div className={tw(`inline-block align-middle border border-gray-300 p-1`)}>
+                                <img className={tw(`h-16`)} src={pdfThumbnail} alt={item['Type']}/>
                               </div>
                             </a>
                           </Link>)
