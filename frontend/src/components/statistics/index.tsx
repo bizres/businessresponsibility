@@ -60,7 +60,7 @@ const Statistics = () => (
     <div className={tw(`max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-center`)}>
       <div className={tw(`flex flex-wrap -mx-8 items-center`)}>
         <div className={tw(`max-w-4xl mx-auto p-4 sm:p-6 lg:p-8  items-center`)}>
-          <h2 className={tw(`text-base text-blue-800 font-semibold tracking-wide uppercase`)}>
+          <h2 className={tw(`text-base text-gray-700 font-semibold tracking-wide uppercase`)}>
             businessresponsibility.ch provides information on the non-financial reporting obligations of Swiss companies.
           </h2>
           <div className={tw(`max-w-2xl mx-auto text-center`)}>

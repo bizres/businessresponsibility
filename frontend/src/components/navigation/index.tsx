@@ -38,7 +38,7 @@ const links = [
 
 const secondaryLinks = [
   {
-    label: `Log in`,
+    label: `Login`,
     href: `/login`,
   }
 ];
@@ -96,7 +96,7 @@ const MobileMenu = () => (
         {secondaryLinks.map((link: Link) => (
           <Link key={`mobile-navi-${link.label}`} href={link.href}>
             <a key={`mobile-${link.label}`}
-               className={tw(`block px-3 py-2 text-base font-medium text-gray-500`)}>
+               className={tw(`block px-3 py-2 text-base font-medium text-yellow-dark`)}>
               {link.label}
             </a>
           </Link>
@@ -117,7 +117,7 @@ const Navigation = () => {
           <div className={tw(`flex items-center`)}>
             <div className={tw(`flex-shrink-0`)}>
               <a href={"/"} title={"Home"}>
-                <img className={tw(`h-12 w-12`)} src="/logo.svg" alt="logo" width={48} height={48}/>
+                <img className={tw(`h-12 w-12`)} src="/logo.png" alt="logo" width={48} height={48}/>
               </a>
             </div>
             <div className={tw(`hidden md:block`)}>
@@ -135,7 +135,7 @@ const Navigation = () => {
           </div>
           <div className={tw(`hidden md:block`)}>
             <div className={tw(`ml-4 flex items-center md:ml-6`)}>
-              <Button modifier="border-0 mr-2">Log in</Button>
+              <Button modifier="border-0 mr-2">Login</Button>
             </div>
           </div>
           <div className={tw(`-mr-2 flex md:hidden`)}>

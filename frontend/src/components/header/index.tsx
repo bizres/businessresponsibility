@@ -7,12 +7,12 @@ const headerStyle = css`
 
 const Header = () => (
   <header className={tw(headerStyle)}>
-    <div className={tw(`max-w-4xl mx-auto py-16 px-14 sm:px-6 lg:px-8`)}>
-      <h1 className={tw(`font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-center leading-snug text-blue-800`)}>
+    <div className={tw(`mx-auto py-20 px-14 sm:px-6 lg:px-8 bg-gray-800`)}>
+      <h1 className={tw(`font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-center leading-snug text-yellow-bright`)}>
         businessresponsibility.ch
       </h1>
-      <div className={tw(`mx-auto`)}>
-        <p className={tw(`mt-10 text-gray-500 text-center text-xl lg:text-3xl`)}>
+      <div className={tw(`mx-auto max-w-5xl`)}>
+        <p className={tw(`mt-10 text-white text-center text-xl lg:text-3xl`)}>
           is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies.
         </p>
       </div>
