@@ -26,7 +26,7 @@ const ListDetailSection = () => {
 
   useEffect(() => {
     if (id !== undefined) {
-      const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=${maxRecords}&view=${view}${sort}&filterByFormula=AND(CompanyId="${id}",Screened=1)`;
+      const url = `https://api.airtable.com/v0/${base}/${table}?maxRecords=${maxRecords}&view=${view}${sort}&filterByFormula=AND({CompanyId (from RP)}="${id}",Screened=1)`;
       const options = {
         headers: {
           Authorization: `Bearer ${apiKey}`
@@ -47,8 +47,8 @@ const ListDetailSection = () => {
   if (records == undefined || !Array.isArray(records) || records.length == 0) {
     return (<div>&nbsp;</div>);
   }
-  const company = records[0]['fields']['CompanyName'][0];
-  const companyUrl = records[0]['fields']['CompanyURL'][0];
+  const company = records[0]['fields']['CompanyName (from RP)'][0];
+  const companyUrl = records[0]['fields']['CompanyURL (from RP)'][0];
   const reportingYear = records[0]['fields']['Year (from RP)'][0];
   const size = 'Unknown';
   const sector = 'Unknown';
