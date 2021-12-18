@@ -9,7 +9,7 @@ export default function Index() {
       <main>
         <section className={tw(`overflow-hidden`)}>
           <div className={tw(`max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 bg-white`)}>
-            <h1 className={tw(`text-2xl text-blue-800 font-semibold tracking-wide uppercase pb-8`)}>Background</h1>
+            <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-8`)}>Berichterstattungspflicht</h1>
             <div className={tw(`text-lg`)}>
               <p className={tw(`py-4`)}>
                 businessresponsibility.ch strengthens transparency and democratic control over the human rights

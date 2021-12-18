@@ -9,9 +9,9 @@ export default function Index() {
       <main>
         <section className={tw(`overflow-hidden`)}>
           <div className={tw(`max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 bg-white`)}>
-            <h1 className={tw(`text-2xl text-blue-800 font-semibold tracking-wide uppercase pb-8`)}>Data</h1>
+            <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-8`)}>Data</h1>
             <div className={tw(`text-lg`)}>
-              <h2 className={tw(`text-blue-800 font-semibold tracking-wide pb-2`)}>Which companies have to
+              <h2 className={tw(`text-gray-600 font-semibold tracking-wide pb-2`)}>Which companies have to
                 report on non-financial (sustainability) aspects and what specifically do they have to report?</h2>
               <p className={tw(``)}>
                 The reporting obligations of companies are regulated in the Swiss Code of obligations (OR). Based on the
@@ -40,7 +40,7 @@ export default function Index() {
                 </ol>
               </div>
 
-              <h2 className={tw(`text-blue-800 font-semibold tracking-wide pb-2`)}>Methodology</h2>
+              <h2 className={tw(`text-gray-600 font-semibold tracking-wide pb-2`)}>Methodology</h2>
               <div className={tw(`py-2`)}>
                 There is a lack of transparency on corporate behaviour regarding environmental, sustainability and human
                 rights

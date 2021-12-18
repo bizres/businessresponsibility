@@ -19,21 +19,17 @@ const links = [
     href: `/`,
   },
   {
-    label: `Data`,
-    href: `/data`,
+    label: `Berichterstattungspflicht`,
+    href: `/reporting_obligations`,
   },
   {
-    label: `Background`,
-    href: `/background`,
+    label: `Methode & Daten`,
+    href: `/method_data`,
   },
   {
-    label: `Team`,
-    href: `/team`,
-  },
-  {
-    label: `Contact`,
-    href: `/contact`,
-  },
+    label: `Über uns`,
+    href: `/about_us`,
+  }
 ];
 
 const secondaryLinks = [
@@ -115,17 +111,17 @@ const Navigation = () => {
       <div className={tw(`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`)}>
         <div className={tw(`flex items-center justify-between h-24`)}>
           <div className={tw(`flex items-center`)}>
-            <div className={tw(`flex-shrink-0`)}>
+            <div className={tw(`flex-shrink-0 hidden`)}>
               <a href={"/"} title={"Home"}>
                 <img className={tw(`h-12 w-12`)} src="/logo.png" alt="logo" width={48} height={48}/>
               </a>
             </div>
             <div className={tw(`hidden md:block`)}>
-              <div className={tw(`ml-10 flex items-baseline space-x-4`)}>
+              <div className={tw(`ml-16 flex items-baseline space-x-36`)}>
                 {links.map((link: Link) => (
                   <Link key={`main-${link.label}`} href={link.href}>
                     <a key={`navi-link-${link.label}`}
-                       className={tw(`text-gray-500 hover:text-gray-600 px-3 py-2 rounded-md font-medium`)}>
+                       className={tw(`text-gray-500 hover:text-gray-600 px-3 py-2 rounded-md font-medium text-lg`)}>
                       {link.label}
                     </a>
                   </Link>
@@ -134,7 +130,7 @@ const Navigation = () => {
             </div>
           </div>
           <div className={tw(`hidden md:block`)}>
-            <div className={tw(`ml-4 flex items-center md:ml-6`)}>
+            <div className={tw(`ml-4 flex items-center md:ml-6 hidden`)}>
               <Button modifier="border-0 mr-2">Login</Button>
             </div>
           </div>

@@ -10,11 +10,11 @@ export default function Index() {
       <main>
         <section className={tw(`overflow-hidden`)}>
           <div className={tw(`max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 bg-white`)}>
-            <h1 className={tw(`text-2xl text-blue-800 font-semibold tracking-wide uppercase pb-4`)}>Team</h1>
+            <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-4`)}>Team</h1>
             <div className={tw(`text-lg`)}>
               <p className={tw(`py-4`)}>
                 We are an interdisciplinary team of political scientists, economists, environmental activists
-                and software developers that support the <a className={tw(`text-blue-800`)} href="https://bizres.ch">businessresponsibility.ch</a> project.
+                and software developers that support the <a className={tw(`text-yellow-dark-900`)} href="https://bizres.ch">businessresponsibility.ch</a> project.
                 This is a non-profit startup project that aims to strengthen transparency and democratic oversight of
                 the human rights performance of Swiss companies.
               </p>

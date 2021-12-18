@@ -120,7 +120,7 @@ const ListSection = () => {
           </div>
           <div className={tw(`mt-2 pb-4 text-center`)}>
             <table className="w-full table-fixed">
-              <thead>
+              <thead className={tw(`border-b-2 border-solid h-16`)}>
               <tr className={tw(`h-40`)}>
                 <th className={tw(`tw-1/2`)}>&nbsp;</th>
                 <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Social concerns</th>
@@ -149,18 +149,18 @@ const ListSection = () => {
                     <>
                       {
                         reportRecords.map((item) => (
-                          <tr className={tw(`border-b-1 h-16`)} key={`company-item-${item.id}`}>
+                          <tr className={tw(`border-b-2 border-dotted h-16`)} key={`company-item-${item.id}`}>
                             <td className={tw(`text-left`)}>
                               <Link key={`company-link-${item.fields['Company']}`}
                                     href={`/company/${item.fields['Company']}`}>
-                                <a className={tw(`text-blue-900 hover:text-blue-600`)}>
+                                <a className={tw(`text-gray-700 text-xl hover:text-yellow-dark-900`)}>
                                   {item.fields[`CompanyName`]}
                                 </a>
                               </Link>
                             </td>
                             {status.map((it, idx) => {
                               //const bg = item.fields[it] === `0` ? `bg-red` : item.fields[it] === `1` ? `bg-green` : `bg-gray`;
-                              const bg = (item.fields[it] === `1`) ? `w-4 h-4 bg-blue-500` : `w-2 h-2 bg-gray-300`;
+                              const bg = (item.fields[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
                               return (
                                 <td className={tw(`text-center`)} key={`td-${idx}`}>
                                   <div className={tw(`m-auto rounded-full ${bg}`)}>&nbsp;</div>
@@ -175,7 +175,7 @@ const ListSection = () => {
               </tbody>
             </table>
             <div className={tw(`mt-12 pb-8 text-center`)}>
-              <span className={tw(`inline-block rounded-full w-6 h-6 bg-blue-500`)}>&nbsp;</span>
+              <span className={tw(`inline-block rounded-full w-6 h-6 bg-yellow-dark`)}>&nbsp;</span>
               <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
               <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
               <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>

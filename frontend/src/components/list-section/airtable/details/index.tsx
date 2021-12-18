@@ -58,21 +58,21 @@ const ListDetailSection = () => {
     <section className={tw(`overflow-hidden`)}>
       <div className={tw(`max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 bg-white`)}>
         <>
-          <h1 className={tw(`text-3xl font-bold text-blue-900`)}>{company}</h1>
+          <h1 className={tw(`text-3xl font-bold text-gray-600`)}>{company}</h1>
           <p>
             <a href={`//${companyUrl}`}
-               className={tw(`font-bold text-blue-900 hover:text-blue-600`)} target={"_blank"}>
+               className={tw(`font-bold text-gray-600 hover:text-yellow-dark-900`)} target={"_blank"}>
               {`${companyUrl}`}
             </a>
           </p>
-          <ul className={tw(`list-disc list-inside pt-4 `)}>
+          <ul className={tw(`list-none list-inside pt-4 text-gray-600`)}>
             <li>Reporting Year: {`${reportingYear}`}</li>
             <li>Size: {`${size}`}</li>
             <li>Sector: {`${sector}`}</li>
           </ul>
           <table className={"w-full table-fixed"}>
             <thead>
-            <tr className={tw(`h-40`)}>
+            <tr className={tw(`h-20`)}>
               <th className={tw(`tw-1/8`)}>&nbsp;</th>
               <th className={tw(`tw-1/4`)}>&nbsp;</th>
               <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Social concerns</th>
@@ -100,39 +100,52 @@ const ListDetailSection = () => {
 
               return (
                 <>
-                  { isYearChanged ? (<></>) :
-                  (
-                    <tr className={tw(`pt-8 block`)}>
-                      <td colSpan={4}>
-                        <span className={tw(`text-3xl font-bold text-blue-900`)}>{year}</span>
-                      </td>
-                    </tr>
+                  {isYearChanged ? (<></>) :
+                    (
+                      <>
+                        <tr className={tw(``)}><td className={tw(`py-2 px-2`)} colSpan={4}>&nbsp;</td></tr>
+                        <tr className={tw(`bg-gray-100`)}>
+                          <td colSpan={2} className={tw(`py-2 px-2`)}>
+                            <span className={tw(`text-2xl font-normal text-gray-600`)}>Gesamtstatus {year}</span>
+                          </td>
+                          {status.map((it, idx) => {
+                            const bg = (item[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
+                            return (
+                              <td className={tw(`text-center`)} key={`td-${idx}`}>
+                                <div className={tw(`m-auto rounded-full  ${bg}`)}>&nbsp;</div>
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      </>
+
                     )
                   }
-                  <tr className={tw(`border-b-1 h-24`)} key={`company-item-${item['uri']}`}>
-                    <td className={tw(`text-left`)}>
-                      <Link key={`report-link-${pdfUrl}`} href={`${pdfUrl}`}>
-                        <a className={tw(`text-blue-900 hover:text-blue-600`)} title={item['Title']}
-                           target={"_blank"}>
-                          <div className={tw(`inline-block align-middle`)}>{item['Type']}</div>
-                        </a>
-                      </Link>
-                    </td>
+                  <tr className={tw(`border-b-2 border-dotted h-24`)} key={`company-item-${item['uri']}`}>
                     <td className={tw(`text-left`)}>
                       {pdfThumbnail == '' ? (<></>)
                         : (
                           <Link key={`report-link-${pdfUrl}`} href={`${pdfUrl}`}>
-                            <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)} title={item['Title']}
+                            <a className={tw(`font-bold text-gray-700 hover:text-yellow-dark-900`)}
+                               title={item['Title']}
                                target={"_blank"}>
-                              <div className={tw(`inline-block align-middle border border-gray-300 p-1`)}>
+                              <div className={tw(`inline-block align-middle border border-solid border-gray-200 p-2`)}>
                                 <img className={tw(`h-16`)} src={pdfThumbnail} alt={item['Type']}/>
                               </div>
                             </a>
                           </Link>)
                       }
                     </td>
+                    <td className={tw(`text-left`)}>
+                      <Link key={`report-link-${pdfUrl}`} href={`${pdfUrl}`}>
+                        <a className={tw(`text-gray-700 text-lg hover:text-yellow-dark-900`)} title={item['Title']}
+                           target={"_blank"}>
+                          <div className={tw(`inline-block align-middle`)}>{item['Type']}</div>
+                        </a>
+                      </Link>
+                    </td>
                     {status.map((it, idx) => {
-                      const bg = (item[it] === `1`) ? `w-4 h-4 bg-blue-500` : `w-2 h-2 bg-gray-300`;
+                      const bg = (item[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
                       return (
                         <td className={tw(`text-center`)} key={`td-${idx}`}>
                           <div className={tw(`m-auto rounded-full  ${bg}`)}>&nbsp;</div>
@@ -147,7 +160,7 @@ const ListDetailSection = () => {
           </table>
         </>
         <div className={tw(`mt-12 pb-8 text-center`)}>
-          <span className={tw(`inline-block rounded-full w-6 h-6 bg-blue-500`)}>&nbsp;</span>
+          <span className={tw(`inline-block rounded-full w-6 h-6 bg-yellow-dark`)}>&nbsp;</span>
           <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
           <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
           <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>
