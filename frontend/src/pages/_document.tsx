@@ -36,7 +36,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <script async src="https://scripts.simpleanalyticscdn.com/latest.js" />
+          {/*<script async src="https://scripts.simpleanalyticscdn.com/latest.js" />*/}
         </Head>
         <body>
           <Main />

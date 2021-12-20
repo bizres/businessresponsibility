@@ -3,6 +3,7 @@ import {tw} from 'twind';
 import Button from '@/components/button';
 import Link from 'next/link';
 import getConfig from 'next/config'
+import {useIntl} from "react-intl";
 
 const {publicRuntimeConfig} = getConfig()
 // Filtering and pagination params
@@ -19,7 +20,7 @@ const base = 'app4bIWfizNSxH4Ik'
 const baseUrl = `https://api.airtable.com/v0/${base}/${table}?pageSize=${pageSize}&view=${view}${sort}`;
 
 const ListSection = () => {
-
+  const {formatMessage: f} = useIntl();
   const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
   const [reportRecords, setReportRecords] = useState(null);
   const [yearFilter, setYearFilter] = useState(defaultYear);
@@ -105,7 +106,7 @@ const ListSection = () => {
               aria-label="search reports"
               type="text"
               className={tw(`border border-gray-300 bg-gray-100 min-w-0 w-full rounded text-gray-800 py-2 px-3 mr-2`)}
-              placeholder="Enter a company name"
+              placeholder={f({id:"Enter a company name"})}
               onChange={event => setCompanyNameFilter(event.target.value)}
               onKeyPress={handleKeyPress}
             />
@@ -116,18 +117,18 @@ const ListSection = () => {
             >
               <option value="2020">2020</option>
             </select>
-            <Button primary={true} onClick={handleSearch}>Search</Button>
+            <Button primary={true} onClick={handleSearch}>{f({id:"Search"})}</Button>
           </div>
           <div className={tw(`mt-2 pb-4 text-center`)}>
             <table className="w-full table-fixed">
               <thead className={tw(`border-b-2 border-solid h-16`)}>
               <tr className={tw(`h-40`)}>
                 <th className={tw(`tw-1/2`)}>&nbsp;</th>
-                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Social concerns</th>
-                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Corruption</th>
-                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Employee concerns</th>
-                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Environment</th>
-                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Human rights</th>
+                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id:"Social concerns"})}</th>
+                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id:"Corruption"})}</th>
+                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id:"Employee concerns"})}</th>
+                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id:"Environment"})}</th>
+                <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id:"Human rights"})}</th>
               </tr>
               </thead>
               <tbody>
@@ -176,13 +177,13 @@ const ListSection = () => {
             </table>
             <div className={tw(`mt-12 pb-8 text-center`)}>
               <span className={tw(`inline-block rounded-full w-6 h-6 bg-yellow-dark`)}>&nbsp;</span>
-              <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
+              <span className={tw(`pl-6 pr-6 align-middle`)}>{f({id:"Reported"})}</span>
               <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
-              <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>
+              <span className={tw(`pl-6 pr-align-middle`)}>{f({id:"Not fully reported"})}</span>
             </div>
             <div className={tw(`text-right`)}>
-              <div>{offset !== null ? <Button primary={true} onClick={handleNextPage}>Show next page</Button> :
-                <Button primary={true} onClick={handleNextPage}>Goto first page</Button>}
+              <div>{offset !== null ? <Button primary={true} onClick={handleNextPage}>{f({id:"Show next page"})}</Button> :
+                <Button primary={true} onClick={handleNextPage}>{f({id:"Goto first page"})}</Button>}
               </div>
             </div>
           </div>

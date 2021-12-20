@@ -4,6 +4,7 @@ import {tw} from 'twind';
 import COMPANY_REPORTS_QUERY from "@/queries/reports/company_reports";
 import Query from "@/components/query/reports/company_report";
 import Button from "@/components/button";
+import {useIntl} from "react-intl";
 
 import React, {useEffect, useState} from 'react';
 import getConfig from 'next/config'
@@ -20,6 +21,7 @@ const sort = "&sort[0][field]=Year&sort[0][direction]=desc";
 const ListDetailSection = () => {
   const router = useRouter()
   const {id} = router.query
+  const {formatMessage: f} = useIntl();
 
   const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
   const [crawlResult, setCrawlResult] = useState([]);
@@ -50,8 +52,8 @@ const ListDetailSection = () => {
   const company = records[0]['fields']['CompanyName (from RP)'][0];
   const companyUrl = records[0]['fields']['CompanyURL (from RP)'][0];
   const reportingYear = records[0]['fields']['Year (from RP)'][0];
-  const size = 'Unknown';
-  const sector = 'Unknown';
+  const size = '-';
+  const sector = '-';
   let prevYear = null;
 
   return (
@@ -66,20 +68,20 @@ const ListDetailSection = () => {
             </a>
           </p>
           <ul className={tw(`list-none list-inside pt-4 text-gray-600`)}>
-            <li>Reporting Year: {`${reportingYear}`}</li>
-            <li>Size: {`${size}`}</li>
-            <li>Sector: {`${sector}`}</li>
+            <li>{f({id: "Reporting year"})}: {`${reportingYear}`}</li>
+            <li>{f({id: "Size"})} {`${size}`}</li>
+            <li>{f({id: "Sector"})}: {`${sector}`}</li>
           </ul>
           <table className={"w-full table-fixed"}>
             <thead>
             <tr className={tw(`h-20`)}>
               <th className={tw(`tw-1/8`)}>&nbsp;</th>
               <th className={tw(`tw-1/4`)}>&nbsp;</th>
-              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Social concerns</th>
-              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Corruption</th>
-              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Employee concerns</th>
-              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Environment</th>
-              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>Human rights</th>
+              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id: "Social concerns"})}</th>
+              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id: "Corruption"})}</th>
+              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id: "Employee concerns"})}</th>
+              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id: "Environment"})}</th>
+              <th className={tw(`tw-1/10 transform -rotate-45 text-gray-600`)}>{f({id: "Human rights"})}</th>
             </tr>
             </thead>
             <tbody>
@@ -103,7 +105,9 @@ const ListDetailSection = () => {
                   {isYearChanged ? (<></>) :
                     (
                       <>
-                        <tr className={tw(``)}><td className={tw(`py-2 px-2`)} colSpan={4}>&nbsp;</td></tr>
+                        <tr className={tw(``)}>
+                          <td className={tw(`py-2 px-2`)} colSpan={4}>&nbsp;</td>
+                        </tr>
                         <tr className={tw(`bg-gray-100`)}>
                           <td colSpan={2} className={tw(`py-2 px-2`)}>
                             <span className={tw(`text-2xl font-normal text-gray-600`)}>Gesamtstatus {year}</span>
@@ -161,13 +165,13 @@ const ListDetailSection = () => {
         </>
         <div className={tw(`mt-12 pb-8 text-center`)}>
           <span className={tw(`inline-block rounded-full w-6 h-6 bg-yellow-dark`)}>&nbsp;</span>
-          <span className={tw(`pl-6 pr-6 align-middle`)}>Reported</span>
+          <span className={tw(`pl-6 pr-6 align-middle`)}>{f({id:"Reported"})}</span>
           <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
-          <span className={tw(`pl-6 pr-align-middle`)}>Not fully reported</span>
+          <span className={tw(`pl-6 pr-align-middle`)}>{f({id:"Not fully reported"})}</span>
         </div>
         <div className={tw(`float-right m-8`)}>
           <Link href={"/"}>
-            <Button primary>Back to reports</Button>
+            <Button primary>{f({id:"Back to reports"})}</Button>
           </Link>
         </div>
       </div>

@@ -2,6 +2,10 @@ import {tw} from 'twind';
 import {useState} from 'react';
 import Button from '@/components/button';
 import Link from 'next/link'
+import {FormControl, Menu, MenuItem, Select} from "@mui/material";
+import {useRouter} from "next/router";
+import {useIntl} from 'react-intl';
+
 
 interface IMenuButton {
   toggleMenu: React.MouseEventHandler<HTMLButtonElement>;
@@ -19,15 +23,15 @@ const links = [
     href: `/`,
   },
   {
-    label: `Berichterstattungspflicht`,
+    label: `Reporting Obligations`,
     href: `/reporting_obligations`,
   },
   {
-    label: `Methode & Daten`,
+    label: `Methods & Data`,
     href: `/method_data`,
   },
   {
-    label: `Über uns`,
+    label: `About Us`,
     href: `/about_us`,
   }
 ];
@@ -37,6 +41,17 @@ const secondaryLinks = [
     label: `Login`,
     href: `/login`,
   }
+];
+
+type Language = {
+  label: string;
+  code: string;
+};
+const languages = [
+  {label: 'DE', code: 'de'},
+  {label: 'FR', code: 'fr'},
+  {label: 'IT', code: 'it'},
+  {label: 'EN', code: 'en'}
 ];
 
 const MenuButton = ({toggleMenu, showMenu}: IMenuButton) => (
@@ -78,66 +93,82 @@ const MenuButton = ({toggleMenu, showMenu}: IMenuButton) => (
   </button>
 );
 
-const MobileMenu = () => (
-  <div className={tw(`md:hidden`)}>
-    <div className={tw(`px-2 pt-2 pb-3 space-y-1 sm:px-3`)}>
-      {links.map((link: Link) => (
-        <a href={link.href} className={tw(`text-gray-500 block px-3 py-2 text-base font-medium`)} key={link.label}>
-          {link.label}
-        </a>
-      ))}
-    </div>
-    <div className={tw(`pt-4 pb-3 border-t border-gray-400`)}>
-      <div className={tw(`px-2 space-y-1`)}>
-        {secondaryLinks.map((link: Link) => (
-          <Link key={`mobile-navi-${link.label}`} href={link.href}>
-            <a key={`mobile-${link.label}`}
-               className={tw(`block px-3 py-2 text-base font-medium text-yellow-dark`)}>
-              {link.label}
-            </a>
-          </Link>
+const MobileMenu = () => {
+  const {formatMessage: f} = useIntl();
+  return (
+    <div className={tw(`md:hidden`)}>
+      <div className={tw(`px-2 pt-2 pb-3 space-y-1 sm:px-3`)}>
+        {links.map((link: Link) => (
+          <a href={link.href} className={tw(`text-gray-500 block px-3 py-2 text-base font-medium`)} key={link.label}>
+            {f({id: link.label})}
+          </a>
         ))}
       </div>
+      <div className={tw(`pt-4 pb-3 border-t border-gray-400`)}>
+        <div className={tw(`px-2 space-y-1`)}>
+          {secondaryLinks.map((link: Link) => (
+            <Link key={`mobile-navi-${link.label}`} href={link.href}>
+              <a key={`mobile-${link.label}`}
+                 className={tw(`block px-3 py-2 text-base font-medium text-yellow-dark`)}>
+                {f({id: link.label})}
+              </a>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
-  </div>
-);
-
+  )
+}
 const Navigation = () => {
+  const {formatMessage: f} = useIntl();
+  const router = useRouter();
+  const {pathname, asPath, query, locale} = router
+
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
 
+  const [selectedIndex, setSelectedIndex] = useState("de");
+
+  const handleMenuItemClick = (event, index) => {
+    setSelectedIndex(index.props.value);
+    router.push({pathname, query}, asPath, {locale: index.props.value})
+  };
+
   return (
-    <nav className={tw(`bg-white`)}>
-      <div className={tw(`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`)}>
-        <div className={tw(`flex items-center justify-between h-24`)}>
-          <div className={tw(`flex items-center`)}>
-            <div className={tw(`flex-shrink-0 hidden`)}>
-              <a href={"/"} title={"Home"}>
-                <img className={tw(`h-12 w-12`)} src="/logo.png" alt="logo" width={48} height={48}/>
-              </a>
-            </div>
-            <div className={tw(`hidden md:block`)}>
-              <div className={tw(`ml-16 flex items-baseline space-x-36`)}>
-                {links.map((link: Link) => (
-                  <Link key={`main-${link.label}`} href={link.href}>
-                    <a key={`navi-link-${link.label}`}
-                       className={tw(`text-gray-500 hover:text-gray-600 px-3 py-2 rounded-md font-medium text-lg`)}>
-                      {link.label}
-                    </a>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className={tw(`hidden md:block`)}>
-            <div className={tw(`ml-4 flex items-center md:ml-6 hidden`)}>
-              <Button modifier="border-0 mr-2">Login</Button>
-            </div>
-          </div>
-          <div className={tw(`-mr-2 flex md:hidden`)}>
-            <MenuButton showMenu={showMenu} toggleMenu={toggleMenu}/>
+    <nav className={tw(`bg-white mt-12`)}>
+      <div className={tw(`max-w-7xl mx-auto`)}>
+        <div className={tw(`hidden md:block`)}>
+          <div className={tw(`flex items-center space-x-36`)}>
+            {links.map((link: Link) => (
+              <Link key={`main-${link.label}`} href={link.href}>
+                <a key={`navi-link-${link.label}`}
+                   className={tw(`text-gray-500 hover:text-yellow-dark-900 rounded-md font-medium text-lg`)}>
+                  {f({id: link.label})}
+                </a>
+              </Link>
+            ))}
+            <FormControl className={tw(``)}>
+              <Select
+                id="language-selector"
+                value={locale}
+                onChange={handleMenuItemClick}
+              >
+                {
+                  languages.map((lang: Language, index) => (
+                    <MenuItem value={`${lang.code}`}>{lang.label}</MenuItem>))
+                }
+              </Select>
+            </FormControl>
           </div>
         </div>
+      </div>
+      <div className={tw(`hidden md:block`)}>
+        <div className={tw(`ml-4 flex items-center md:ml-6 hidden`)}>
+          <Button modifier="border-0 mr-2">Login</Button>
+        </div>
+      </div>
+      <div className={tw(`-mr-2 flex md:hidden`)}>
+        <MenuButton showMenu={showMenu} toggleMenu={toggleMenu}/>
       </div>
       {showMenu ? <MobileMenu/> : null}
     </nav>

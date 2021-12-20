@@ -8,7 +8,7 @@ export default function Index() {
     <Page>
       <main>
         <section className={tw(`overflow-hidden`)}>
-          <div className={tw(`max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 bg-white`)}>
+          <div className={tw(`max-w-4xl mx-auto pt-16 pb-16 bg-white`)}>
             <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-8`)}>Data</h1>
             <div className={tw(`text-lg`)}>
               <h2 className={tw(`text-gray-600 font-semibold tracking-wide pb-2`)}>Which companies have to
