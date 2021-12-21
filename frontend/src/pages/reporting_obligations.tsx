@@ -8,7 +8,7 @@ export default function Index() {
     <Page>
       <main>
         <section className={tw(`overflow-hidden`)}>
-          <div className={tw(`max-w-4xl mx-auto pt-16 pb-16 bg-white`)}>
+          <div className={tw(`max-w-4xl mx-auto pt-24 pb-16 bg-white`)}>
             <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-8`)}>Berichterstattungspflicht</h1>
             <div className={tw(`text-lg`)}>
               <p className={tw(`py-4`)}>

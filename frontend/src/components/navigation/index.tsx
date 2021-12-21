@@ -48,10 +48,10 @@ type Language = {
   code: string;
 };
 const languages = [
-  {label: 'DE', code: 'de'},
-  {label: 'FR', code: 'fr'},
-  {label: 'IT', code: 'it'},
-  {label: 'EN', code: 'en'}
+  {label: 'Deutsch', code: 'de'},
+  {label: 'Français', code: 'fr'},
+  {label: 'Italiano', code: 'it'},
+  {label: 'English', code: 'en'}
 ];
 
 const MenuButton = ({toggleMenu, showMenu}: IMenuButton) => (
@@ -135,10 +135,24 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={tw(`bg-white mt-12`)}>
-      <div className={tw(`max-w-7xl mx-auto`)}>
+    <nav className={tw(`bg-white mt-4`)}>
+      <div className={tw(`max-w-7xl mx-auto grid place-items-end`)}>
+        <FormControl className={tw(``)}>
+          <Select
+            id="language-selector"
+            value={locale}
+            onChange={handleMenuItemClick}
+          >
+            {
+              languages.map((lang: Language, index) => (
+                <MenuItem value={`${lang.code}`}>{lang.label}</MenuItem>))
+            }
+          </Select>
+        </FormControl>
+      </div>
+      <div className={tw(`max-w-7xl mx-auto mt-12`)}>
         <div className={tw(`hidden md:block`)}>
-          <div className={tw(`flex items-center space-x-36`)}>
+          <div className={tw(`grid grid grid-cols-4 gap-4 place-items-center`)}>
             {links.map((link: Link) => (
               <Link key={`main-${link.label}`} href={link.href}>
                 <a key={`navi-link-${link.label}`}
@@ -147,18 +161,7 @@ const Navigation = () => {
                 </a>
               </Link>
             ))}
-            <FormControl className={tw(``)}>
-              <Select
-                id="language-selector"
-                value={locale}
-                onChange={handleMenuItemClick}
-              >
-                {
-                  languages.map((lang: Language, index) => (
-                    <MenuItem value={`${lang.code}`}>{lang.label}</MenuItem>))
-                }
-              </Select>
-            </FormControl>
+
           </div>
         </div>
       </div>
