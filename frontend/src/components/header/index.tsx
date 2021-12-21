@@ -1,22 +1,12 @@
 import {css, tw} from 'twind/css';
 
-const headerStyle = css`
-  background-color: #ffffff;
-  min-height: calc(30vh - 6rem);
-`;
 
 const Header = () => (
-  <header className={tw(headerStyle)}>
-
-    <div className={tw(`max-w-full h-60 bg-yellow-bright mt-10`)}>
-      <div className={tw(`max-w-7xl mx-auto`)}>
-      <div className={tw(`relative`)}>
-        <img className={tw(`absolute h-48 w-38 -left-24 -top-24`)} src="/logo.png" alt="logo"/>
-      </div>
-      <div className={tw(`max-w-5xl mx-auto pt-16`)}>
+  <div >
+    <div className={tw(`max-w-full h-96 lg:bg-hero-pattern bg-fixed bg-cover bg-no-repeat bg-bottom`)}>
+      <div className={tw(`max-w-5xl mx-auto pt-36`)}>
         <div className={tw(`text-6xl font-semibold text-gray-800`)}>businessresponsibility.ch</div>
         <div className={tw(`text-2xl mt-4 text-gray-800`)}>Digitale Plattform für Nachhaltigkeitsberichterstattung in der Schweiz</div>
-      </div>
       </div>
     </div>
     <div className={tw(`mx-auto pt-20 px-16 sm:px-6 lg:px-8`)}>
@@ -32,7 +22,7 @@ const Header = () => (
         </p>
       </div>
     </div>
-  </header>
+  </div>
 );
 
 export default Header;

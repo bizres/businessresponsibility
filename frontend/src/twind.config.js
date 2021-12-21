@@ -7,10 +7,16 @@ export default {
             sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
       },
       colors: {
-        'yellow-bright': "#f6d44c",
+        'yellow-bright': "#fcdf3c",
         'yellow-dark': "#FFC000",
         'yellow-dark-900': '#E49B0F'
-      }
+      },
+      backgroundImage: {
+        'hero-pattern': "url('/yellow_bg.jpg')",
+      },
     },
+    backgroundPosition: {
+      'top-4': 'center top -24rem',
+    }
   },
 };

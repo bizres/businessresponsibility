@@ -1,15 +1,17 @@
 import Head from 'next/head';
 import Navigation from '@/components/navigation';
-import { tw } from 'twind';
+import {tw} from 'twind';
+import LogoHeader from "@/components/header/LogoHeader";
 
 interface IProps {
   children: React.ReactNode;
 }
 
-const Page = ({ children }: IProps) => (
+const Page = ({children}: IProps) => (
   <div>
     <div className={tw(`min-h-screen flex flex-col`)}>
-      <Navigation />
+      <Navigation/>
+      <LogoHeader/>
       {children}
     </div>
   </div>
