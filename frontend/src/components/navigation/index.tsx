@@ -135,7 +135,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={tw(`bg-white mt-4`)}>
+    <nav className={tw(`bg-white pt-4`)}>
       <div className={tw(`max-w-7xl mx-auto grid place-items-end`)}>
         <FormControl className={tw(``)}>
           <Select

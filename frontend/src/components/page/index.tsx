@@ -9,7 +9,7 @@ interface IProps {
 
 const Page = ({children}: IProps) => (
   <div>
-    <div className={tw(`min-h-screen flex flex-col`)}>
+    <div className={tw(`min-h-screen flex flex-col `)}>
       <Navigation/>
       <LogoHeader/>
       {children}

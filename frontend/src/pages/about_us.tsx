@@ -3,6 +3,45 @@ import Footer from '@/components/footer';
 import ListDetailSection from "@/components/list-section/details";
 import {tw} from "twind";
 import Check from "@/constants/svg/check.svg";
+import {Avatar, Link} from "@mui/material";
+
+const team = [
+  {
+    name: 'David Weiss',
+    title: 'Project Lead',
+    img: 'david.jpg'
+  },
+  {
+    name: 'Dina Pomeranz',
+    title: 'Strategic Advisor',
+    img: 'dina.jpg'
+  },
+  {
+    name: 'Debi Kistler',
+    title: 'Project Manager',
+    img: 'debi.jpg'
+  },
+  {
+    name: 'Koby Awuah',
+    title: 'Business Manager',
+    img: 'kobi.jpg'
+  },
+  {
+    name: 'Cahit Atilgan',
+    title: 'Tech Lead',
+    img: 'cahit.jpg'
+  },
+  {
+    name: 'Nickolay Golomysov',
+    title: 'Tech Developer',
+    img: 'nick.jpg'
+  },
+  {
+    name: 'Miguel Vazquez',
+    title: 'Tech Developer',
+    img: 'miguel.jpg'
+  }
+]
 
 export default function Index() {
   return (
@@ -25,57 +64,14 @@ export default function Index() {
                 democratic participation in Switzerland through digital solutions.
               </p>
             </div>
-            <div className={tw(`flex flex-wrap my-12`)}>
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>David Weiss</div>
+            <div className={tw(`flex flex-wrap my-14`)}>
+              {team.map((member) => (
+                <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8 leading-loose text-gray-700 text-l font-medium w-full text-center `)}>
+                  <Avatar alt={`${member.name}`} src={`/images/team/${member.img}`}  sx={{ width: 160, height: 160 }} />
+                  <div className={tw(`text-yellow-dark-900 pt-2`)}>{member.title}</div>
+                  <div>{member.name}</div>
                 </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Project Lead</p>
-              </div>
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>Cahit Atilgan</div>
-                </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Tech Lead</p>
-              </div>
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>Miguel Vazquez</div>
-                </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Tech Developer</p>
-              </div>
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>Nickolay Golomysov</div>
-                </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Tech Developer</p>
-              </div>
-
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>Dina Pomeranz</div>
-                </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Strategic Advisor</p>
-              </div>
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>Koby Awuah</div>
-                </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Stakeholder Manager</p>
-              </div>
-              <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8`)}>
-                <div className={tw(`flex items-center mb-2`)}>
-                  <div className={tw(`text-xl`)}>Debi Kistler</div>
-                </div>
-                <img className={tw(``)} src="/images/team/unknown_person.jpg " alt="logo" width={120} height={120}/>
-                <p className={tw(`leading-loose text-gray-500 `)}>Project Manager</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>

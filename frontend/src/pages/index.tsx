@@ -4,6 +4,8 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import Statistics from "@/components/statistics";
 import ListSection from "@/components/list-section/airtable";
+import {css, tw} from 'twind/css';
+
 
 export default function Home() {
   return (
@@ -13,7 +15,7 @@ export default function Home() {
         description="business responsibility is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies."
       />
       <Header/>
-      <main>
+      <main className={tw(`bg-white`)}>
         <Statistics/>
         <ListSection />
       </main>
