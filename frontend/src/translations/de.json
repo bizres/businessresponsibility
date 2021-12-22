@@ -17,5 +17,20 @@
   "Show next page": "Nächste Seite",
   "Goto first page": "Zurück zur ersten Seite",
   "Search": "Suchen",
-  "Enter a company name": "Firmenname eingeben"
+  "Enter a company name": "Firmenname eingeben",
+  "Total status": "Gesamtstatus",
+  "Report error": "Fehler melden",
+  "Upload a report": "Bericht hochladen",
+  "You found inconsistencies or errors in the reporting list?": "Sie haben Unstimmigkeiten oder Fehler in der Berichtsliste gefunden?",
+  "Thanks for informing us! We will fix them as soon as possible.": "Danke für den Hinweis! Wir werden sie so schnell wie möglich beheben.",
+  "Firstname": "Vorname",
+  "Lastname": "Nachname",
+  "E-Mail": "E-Mail",
+  "Your message": "Deine Nachricht",
+  "Cancel": "Abbrechen",
+  "Send": "Senden",
+  "Send a Feedback": "Eine Rückmeldung senden",
+  "Company": "Unternehmen",
+  "Report title": "Berichtstitel",
+  "You have an additional report for listing here? We gladly add it to our reporting list after a short inspection. Thanks for your cooperation.": "Sie haben einen zusätzlichen Bericht, den Sie hier auflisten möchten? Gerne nehmen wir ihn nach einer kurzen Prüfung in unsere Berichtsliste auf. Vielen Dank für Ihre Mitarbeit."
 }

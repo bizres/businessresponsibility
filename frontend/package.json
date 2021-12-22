@@ -29,6 +29,7 @@
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@fontsource/inter": "4.2.1",
+    "@mui/icons-material": "5.2.5",
     "@mui/material": "5.2.4",
     "@svgr/webpack": "5.5.0",
     "apollo-boost": "0.4.9",

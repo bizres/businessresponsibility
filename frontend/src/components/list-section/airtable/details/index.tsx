@@ -1,13 +1,14 @@
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import {tw} from 'twind';
-import COMPANY_REPORTS_QUERY from "@/queries/reports/company_reports";
-import Query from "@/components/query/reports/company_report";
 import Button from "@/components/button";
 import {useIntl} from "react-intl";
 
 import React, {useEffect, useState} from 'react';
 import getConfig from 'next/config'
+import {createTheme, ThemeProvider} from "@mui/material";
+import ReportError from "@/components/list-section/ReportError";
+import UploadReport from "@/components/list-section/UploadReport";
 
 const {publicRuntimeConfig} = getConfig();
 const apiKey = publicRuntimeConfig ? publicRuntimeConfig.airtableApiKey : "";
@@ -17,6 +18,23 @@ const base = 'app4bIWfizNSxH4Ik';
 const maxRecords = 100;
 const sort = "&sort[0][field]=Year&sort[0][direction]=desc";
 
+const theme = createTheme({
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          placement: 'top',
+          backgroundColor: '#f6d44c',
+          color: "black",
+          fontSize: "1em",
+        },
+        arrow: {
+          color: '#f6d44c'
+        }
+      },
+    },
+  },
+});
 
 const ListDetailSection = () => {
   const router = useRouter()
@@ -60,7 +78,13 @@ const ListDetailSection = () => {
     <section className={tw(`overflow-hidden`)}>
       <div className={tw(`max-w-7xl mx-auto mt-16 p-4 sm:p-6 lg:p-8 bg-white`)}>
         <>
-          <h1 className={tw(`text-3xl font-bold text-gray-600`)}>{company}</h1>
+          <div>
+            <span className={tw(`text-3xl font-bold text-gray-600`)}>{company}</span>
+            <ThemeProvider theme={theme}>
+              <ReportError/>
+              <UploadReport/>
+            </ThemeProvider>
+          </div>
           <p>
             <a href={`//${companyUrl}`}
                className={tw(`font-bold text-gray-600 hover:text-yellow-dark-900`)} target={"_blank"}>
@@ -110,7 +134,8 @@ const ListDetailSection = () => {
                         </tr>
                         <tr className={tw(`bg-gray-100`)}>
                           <td colSpan={2} className={tw(`py-2 px-2`)}>
-                            <span className={tw(`text-2xl font-normal text-gray-600`)}>Gesamtstatus {year}</span>
+                            <span
+                              className={tw(`text-2xl font-normal text-gray-600`)}>{f({id: "Total status"})} {year}</span>
                           </td>
                           {status.map((it, idx) => {
                             const bg = (item[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
@@ -165,13 +190,13 @@ const ListDetailSection = () => {
         </>
         <div className={tw(`mt-12 pb-8 text-center`)}>
           <span className={tw(`inline-block rounded-full w-6 h-6 bg-yellow-dark`)}>&nbsp;</span>
-          <span className={tw(`pl-6 pr-6 align-middle`)}>{f({id:"Reported"})}</span>
+          <span className={tw(`pl-6 pr-6 align-middle`)}>{f({id: "Reported"})}</span>
           <span className={tw(`inline-block align-middle rounded-full w-2 h-2 bg-gray-300`)}>&nbsp;</span>
-          <span className={tw(`pl-6 pr-align-middle`)}>{f({id:"Not fully reported"})}</span>
+          <span className={tw(`pl-6 pr-align-middle`)}>{f({id: "Not fully reported"})}</span>
         </div>
         <div className={tw(`float-right m-8`)}>
           <Link href={"/"}>
-            <Button primary>{f({id:"Back to reports"})}</Button>
+            <Button primary>{f({id: "Back to reports"})}</Button>
           </Link>
         </div>
       </div>

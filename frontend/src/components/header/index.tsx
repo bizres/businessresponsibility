@@ -14,10 +14,6 @@ const customStyle = tw(
 
 const customStyle = tw(
   css({
-    '&': {
-      //'position': 'relative',
-      //'height': '300px'
-    },
     '&::before': {
       'content': '" "',
       'position': "fixed",
@@ -25,30 +21,12 @@ const customStyle = tw(
       'height': '100%',
       'top': '0',
       'background': "url('/yellow_bg.jpg') no-repeat center top",
-      //'transform': 'translateZ(-1px) scale(1.5)',
       'background-size': 'cover',
-      //'background-attachment': "fixed",
-      //'background-size': "center",
       'will-change': "transform",
       'z-index': "-1"
     }
   })
 );
-
-/*
-main::before {
-  content: '';
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url('/some-beautiful-image.png') no-repeat center center;
-  background-attachment: fixed;
-  background-size: cover;
-  will-change: transform;
-  z-index: -1;
-}
- */
-// lg:bg-hero-pattern sm:bg-local md:bg-scroll lg:bg-local xl:bg-fixed bg-cover bg-no-repeat bg-bottom -webkit-transform: translate3d(0,0,0)
 
 const Header = () => (
   <div>
