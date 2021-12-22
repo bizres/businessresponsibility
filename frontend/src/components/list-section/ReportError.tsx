@@ -25,7 +25,7 @@ export default function ReportError() {
 
   return (
     <span>
-      <Tooltip title={f({id: "Report error"})} className={tw(`align-top ml-4`)} arrow placement={`top`}>
+      <Tooltip title={f({id: "Report error"})} className={tw(`l-4`)} arrow placement={`top`}>
         <IconButton onClick={handleClickOpen}>
           <FeedbackOutlined className={tw(`text-2xl`)}/>
         </IconButton>

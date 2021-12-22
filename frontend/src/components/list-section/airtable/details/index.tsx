@@ -80,10 +80,12 @@ const ListDetailSection = () => {
         <>
           <div>
             <span className={tw(`text-3xl font-bold text-gray-600`)}>{company}</span>
-            <ThemeProvider theme={theme}>
-              <ReportError/>
-              <UploadReport/>
-            </ThemeProvider>
+            <span className={tw(`align-top ml-4`)}>
+              <ThemeProvider theme={theme}>
+                <ReportError/>
+                <UploadReport/>
+              </ThemeProvider>
+            </span>
           </div>
           <p>
             <a href={`//${companyUrl}`}

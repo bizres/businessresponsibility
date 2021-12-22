@@ -31,7 +31,7 @@ export default function UploadReport() {
 
   return (
     <span>
-      <Tooltip title={f({id: "Report error"})} className={tw(`align-top`)} arrow placement={`top`}>
+      <Tooltip title={f({id: "Upload a report"})} className={tw(``)} arrow placement={`top`}>
         <IconButton onClick={handleClickOpen}>
           <NoteAddOutlined className={tw(`text-2xl`)}/>
         </IconButton>

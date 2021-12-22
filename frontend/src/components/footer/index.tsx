@@ -80,7 +80,6 @@ const Footer = () => {
                         key={`footer-main-${link.label}`} href={`/${locale}${link.href}`}
                         className={tw(`text-white text-sm font-medium leading-6 no-underline hover:text-yellow-bright`)}
                       >
-
                         {f({id: link.label})}
                       </Link>
                     </li>
