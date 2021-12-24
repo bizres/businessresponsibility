@@ -1,17 +1,5 @@
 import {css, tw} from 'twind/css';
 
-/*
-const customStyle = tw(
-  css({
-    '&::before': {
-      content: '"🙁"'
-
-
-    },
-  }),
-)
-*/
-
 const customStyle = tw(
   css({
     '&::before': {
