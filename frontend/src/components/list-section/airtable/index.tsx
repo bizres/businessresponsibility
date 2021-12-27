@@ -98,9 +98,9 @@ const ListSection = () => {
     <section className={tw(`overflow-hidden`)}>
       <div className={tw(`max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 bg-white`)}>
         <div className={tw(`mb-16 text-center`)}>
-          <h2 className={tw(`text-3xl text-gray-700 font-semibold tracking-wide`)}>Business Responsibility Reports</h2>
+          <h2 className={tw(`text-3xl text-gray-700 font-ms-semi-bold tracking-wide`)}>{f({id:"Business Responsibility Reports"})}</h2>
         </div>
-        <div className={tw(`mt-2 pb-4 text-center`)}>
+        <div className={tw(`mt-2 pb-4 text-center font-ms-regular`)}>
           <div className={tw(`flex w-full`)}>
             <input
               aria-label="search reports"
@@ -111,7 +111,7 @@ const ListSection = () => {
               onKeyPress={handleKeyPress}
             />
             <select
-              className={tw(`font-sans font-medium py-2 px-2 mx-4 border rounded bg-white text-gray-600 border-gray-300 hover:bg-gray-100`)}
+              className={tw(`font-ms-regular py-2 px-2 mx-4 border rounded bg-white text-gray-600 border-gray-300 hover:bg-gray-100`)}
               onChange={event => setYearFilter(event.target.value)}
               defaultValue={"2020"}
             >
@@ -154,7 +154,7 @@ const ListSection = () => {
                             <td className={tw(`text-left`)}>
                               <Link key={`company-link-${item.fields['Company']}`}
                                     href={`/company/${item.fields['Company']}`}>
-                                <a className={tw(`text-gray-700 text-xl hover:text-yellow-dark-900`)}>
+                                <a className={tw(`text-gray-700 font-ms-regular text-lg hover:text-yellow-dark-900`)}>
                                   {item.fields[`CompanyName`]}
                                 </a>
                               </Link>

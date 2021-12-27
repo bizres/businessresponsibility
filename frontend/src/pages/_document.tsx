@@ -1,18 +1,19 @@
 import * as React from 'react';
-import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
-import { setup } from 'twind';
-import { asyncVirtualSheet, getStyleTagProperties } from 'twind/server';
+import Document, {DocumentContext, Head, Html, Main, NextScript} from 'next/document';
+import {setup} from 'twind';
+import {asyncVirtualSheet, getStyleTagProperties} from 'twind/server';
 import twindConfig from '../twind.config';
+import {tw} from "twind";
 
 const sheet = asyncVirtualSheet();
 
-setup({ ...twindConfig, sheet });
+setup({...twindConfig, sheet});
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     sheet.reset();
     const initialProps = await Document.getInitialProps(ctx);
-    const { id, textContent } = getStyleTagProperties(sheet);
+    const {id, textContent} = getStyleTagProperties(sheet);
     const styleProps = {
       id,
       key: id,
@@ -34,13 +35,13 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" >
         <Head>
           {/*<script async src="https://scripts.simpleanalyticscdn.com/latest.js" />*/}
         </Head>
         <body>
-          <Main />
-          <NextScript />
+        <Main/>
+        <NextScript/>
         </body>
       </Html>
     );

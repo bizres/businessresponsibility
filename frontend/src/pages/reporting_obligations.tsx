@@ -1,6 +1,5 @@
 import Page from '@/components/page';
 import Footer from '@/components/footer';
-import ListDetailSection from "@/components/list-section/details";
 import {tw} from "twind";
 
 export default function Index() {
@@ -9,7 +8,8 @@ export default function Index() {
       <main>
         <section className={tw(`overflow-hidden`)}>
           <div className={tw(`max-w-4xl mx-auto pt-24 pb-16 bg-white`)}>
-            <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-8`)}>Berichterstattungspflicht</h1>
+            <h1
+              className={tw(`text-2xl text-gray-600 font-ms-semi-bold tracking-wide uppercase pb-8`)}>Berichterstattungspflicht</h1>
             <div className={tw(`text-lg`)}>
               <p className={tw(`py-4`)}>
                 businessresponsibility.ch strengthens transparency and democratic control over the human rights
@@ -45,9 +45,10 @@ export default function Index() {
               </p>
               <p className={tw(`py-4`)}>
                 businessresponsibility.ch is financially supported by Stiftung Mercator Schweiz through the <a
-                className={tw(`text-blue-800`)}
+                className={tw(`text-yellow-dark-900 font-ms-medium`)}
                 href="https://prototypefund.opendata.ch/en/project/businessresponsibility-ch/"
-                target="_blank"> Prototype Fund</a>, a program run by Opendata.ch
+                target="_blank"> Prototype Fund</a>, a program run by <a className={tw(`text-yellow-dark-900 font-ms-medium`)} href="https://opendata.ch/"
+                   title={'Opendata.ch'} target="_blank">Opendata.ch</a>.
               </p>
             </div>
           </div>

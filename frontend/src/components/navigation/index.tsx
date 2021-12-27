@@ -99,7 +99,7 @@ const MobileMenu = () => {
     <div className={tw(`md:hidden`)}>
       <div className={tw(`px-2 pt-2 pb-3 space-y-1 sm:px-3`)}>
         {links.map((link: Link) => (
-          <a href={link.href} className={tw(`text-gray-500 block px-3 py-2 text-base font-medium`)} key={link.label}>
+          <a href={link.href} className={tw(`text-gray-500 block px-3 py-2 text-base font-ms-regular`)} key={link.label}>
             {f({id: link.label})}
           </a>
         ))}
@@ -109,7 +109,7 @@ const MobileMenu = () => {
           {secondaryLinks.map((link: Link) => (
             <Link key={`mobile-navi-${link.label}`} href={link.href}>
               <a key={`mobile-${link.label}`}
-                 className={tw(`block px-3 py-2 text-base font-medium text-yellow-dark`)}>
+                 className={tw(`block px-3 py-2 text-base font-ms-regular text-yellow-dark`)}>
                 {f({id: link.label})}
               </a>
             </Link>
@@ -135,7 +135,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={tw(`bg-white pt-4`)}>
+    <nav className={tw(`bg-white pt-4 font-ms-medium`)}>
       <div className={tw(`max-w-7xl mx-auto grid place-items-end`)}>
         <FormControl className={tw(``)}>
           <Select
@@ -156,7 +156,7 @@ const Navigation = () => {
             {links.map((link: Link) => (
               <Link key={`main-${link.label}`} href={link.href}>
                 <a key={`navi-link-${link.label}`}
-                   className={tw(`text-gray-500 hover:text-yellow-dark-900 rounded-md font-medium text-lg`)}>
+                   className={tw(`text-gray-500 hover:text-yellow-dark-900 rounded-md font-ms-regular text-lg`)}>
                   {f({id: link.label})}
                 </a>
               </Link>

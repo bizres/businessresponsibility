@@ -49,11 +49,11 @@ export default function Index() {
       <main>
         <section className={tw(`overflow-hidden`)}>
           <div className={tw(`max-w-4xl mx-auto pt-24 pb-16 bg-white`)}>
-            <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-4`)}>Team</h1>
+            <h1 className={tw(`text-2xl text-gray-600 font-ms-semi-bold tracking-wide uppercase pb-4`)}>Team</h1>
             <div className={tw(`text-lg`)}>
               <p className={tw(`py-4`)}>
                 We are an interdisciplinary team of political scientists, economists, environmental activists
-                and software developers that support the <a className={tw(`text-yellow-dark-900`)} href="https://bizres.ch">businessresponsibility.ch</a> project.
+                and software developers that support the <a className={tw(`text-yellow-dark-900 font-ms-medium`)} href="https://bizres.ch">businessresponsibility.ch</a> project.
                 This is a non-profit startup project that aims to strengthen transparency and democratic oversight of
                 the human rights performance of Swiss companies.
               </p>
@@ -66,9 +66,9 @@ export default function Index() {
             </div>
             <div className={tw(`flex flex-wrap my-14`)}>
               {team.map((member) => (
-                <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8 leading-loose text-gray-700 text-l font-medium w-full text-center `)}>
+                <div className={tw(`w-full md:w-1/2 lg:w-1/4 p-8 leading-loose text-gray-700 text-l font-ms-regular w-full text-center `)}>
                   <Avatar alt={`${member.name}`} src={`/images/team/${member.img}`}  sx={{ width: 160, height: 160 }} />
-                  <div className={tw(`text-yellow-dark-900 pt-2`)}>{member.title}</div>
+                  <div className={tw(`text-yellow-dark-900 font-ms-semi-bold pt-2`)}>{member.title}</div>
                   <div>{member.name}</div>
                 </div>
               ))}

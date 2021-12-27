@@ -112,7 +112,7 @@ const ListDetailSection = () => {
         <div className={tw(`max-w-7xl mx-auto mt-16 p-4 sm:p-6 lg:p-8 bg-white`)}>
           <>
             <div>
-              <span className={tw(`text-3xl font-bold text-gray-600`)}>{company}</span>
+              <span className={tw(`text-3xl font-ms-semi-bold text-gray-600`)}>{company}</span>
               <span className={tw(`align-top ml-4`)}>
               <ThemeProvider theme={theme}>
                 <ReportError/>
@@ -122,7 +122,7 @@ const ListDetailSection = () => {
             </div>
             <p>
               <a href={`//${companyUrl}`}
-                 className={tw(`font-bold text-gray-600 hover:text-yellow-dark-900`)} target={"_blank"}>
+                 className={tw(`font-ms-semi-bold text-gray-600 hover:text-yellow-dark-900`)} target={"_blank"}>
                 {`${companyUrl}`}
               </a>
             </p>
@@ -170,7 +170,7 @@ const ListDetailSection = () => {
                           <tr className={tw(`bg-gray-100`)}>
                             <td colSpan={2} className={tw(`py-2 px-2`)}>
                             <span
-                              className={tw(`text-2xl font-normal text-gray-600`)}>{f({id: "Total status"})} {year}</span>
+                              className={tw(`text-2xl font-ms-regular text-gray-600`)}>{f({id: "Total status"})} {year}</span>
                             </td>
                             {status.map((it, idx) => {
                               const bg = (item[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
@@ -189,7 +189,7 @@ const ListDetailSection = () => {
                         {pdfThumbnail == '' ? (<></>)
                           : (
                             <a
-                              className={tw(`group inline-block relative font-bold text-gray-700 hover:text-yellow-dark-900 hover:bg-black hover:opacity-60`)}
+                              className={tw(`group inline-block relative font-ms-semi-bold text-gray-700 hover:text-yellow-dark-900 hover:bg-black hover:opacity-60`)}
                               href={'javascript:void(0);'}
                               title={item['Title']}
                               target={"_self"}

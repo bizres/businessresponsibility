@@ -9,9 +9,9 @@ export default function Index() {
       <main>
         <section className={tw(`overflow-hidden`)}>
           <div className={tw(`max-w-4xl mx-auto pt-24 pb-16 bg-white`)}>
-            <h1 className={tw(`text-2xl text-gray-600 font-semibold tracking-wide uppercase pb-8`)}>Data</h1>
+            <h1 className={tw(`text-2xl text-gray-600 font-ms-semi-bold tracking-wide uppercase pb-8`)}>Data</h1>
             <div className={tw(`text-lg`)}>
-              <h2 className={tw(`text-gray-600 font-semibold tracking-wide pb-2`)}>Which companies have to
+              <h2 className={tw(`text-gray-600 font-ms-semi-bold tracking-wide pb-2`)}>Which companies have to
                 report on non-financial (sustainability) aspects and what specifically do they have to report?</h2>
               <p className={tw(``)}>
                 The reporting obligations of companies are regulated in the Swiss Code of obligations (OR). Based on the
@@ -23,7 +23,7 @@ export default function Index() {
                 OR Art. 964 stipulates the conditions for companies. Companies have to report if they:
                 <ul>
                   <li>
-                    1. Exceed 500 employees <span className={tw(`font-semibold`)}>AND</span>
+                    1. Exceed 500 employees <span className={tw(`font-ms-semi-bold`)}>AND</span>
                   </li>
                   <li>a. Exceed total assets of 20 mio CHF
                   </li>
@@ -40,7 +40,7 @@ export default function Index() {
                 </ol>
               </div>
 
-              <h2 className={tw(`text-gray-600 font-semibold tracking-wide pb-2`)}>Methodology</h2>
+              <h2 className={tw(`text-gray-600 font-ms-semi-bold tracking-wide pb-2`)}>Methodology</h2>
               <div className={tw(`py-2`)}>
                 There is a lack of transparency on corporate behaviour regarding environmental, sustainability and human
                 rights

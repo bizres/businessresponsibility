@@ -3,12 +3,9 @@ import Button from '@/components/button';
 import {useIntl} from "react-intl";
 import {useRouter} from "next/router";
 import {Link} from "@mui/material";
+import {css} from "twind/css";
 
 const exploreLinks = [
-  {
-    label: `Home`,
-    href: `/`,
-  },
   {
     label: `Reporting Obligations`,
     href: `/reporting_obligations`,
@@ -23,7 +20,7 @@ const exploreLinks = [
   }
 ];
 
-const followLinks=  [
+const followLinks = [
   {
     label: `Facebook`,
     href: `https://facebook.com`,
@@ -53,8 +50,6 @@ const aboutLinks = [
   },
 ];
 
-
-
 const Footer = () => {
   const {formatMessage: f} = useIntl();
   const router = useRouter();
@@ -66,19 +61,21 @@ const Footer = () => {
         <div className={tw(`mb-14 flex items-center w-full`)}>
           <img className={tw(`h-12 w-12 mr-4 bg-transparent`)} src="/logo_transparent.png" alt="logo" width={48}
                height={48}/>
-          <p className={tw(`text-2xl text-yellow-bright font-bold`)}>businessresponsibility.ch</p>
+          <p className={tw(`text-2xl text-yellow-bright font-ms-semi-bold`)}>businessresponsibility.ch</p>
         </div>
         <div className={tw(`w-full lg:w-1/2`)}>
-          <ul className={tw(`text-lg font-light flex flex-wrap w-full`)}>
+          <ul className={tw(`text-lg font-ms-regular flex flex-wrap w-full`)}>
             <li className={tw(`w-1/3 md:w-1/3 lg:w-1/3`)}>
               <div>
-                <h4 className={tw(`text-white text-base font-bold mb-1`)}>Explore</h4>
+                <h4 className={tw(`text-yellow-bright text-base font-ms-bold mb-1`)}>Explore</h4>
                 <ul>
                   {exploreLinks.map((link) => (
-                    <li className={tw(`text-white text-sm font-medium leading-6`)} key={link.label}>
+                    <li className={tw(`text-white text-sm leading-6`)} key={link.label}>
                       <Link
                         key={`footer-main-${link.label}`} href={`/${locale}${link.href}`}
-                        className={tw(`text-white text-sm font-medium leading-6 no-underline hover:text-yellow-bright`)}
+                        className={tw(`text-white text-sm font-ms-medium leading-6 no-underline hover:text-yellow-bright`)}
+                        color={"inherit"}
+                        underline={'none'}
                       >
                         {f({id: link.label})}
                       </Link>
@@ -89,13 +86,15 @@ const Footer = () => {
             </li>
             <li className={tw(`w-1/3 md:w-1/3 lg:w-1/3`)}>
               <div>
-                <h4 className={tw(`text-white text-base font-bold mb-1`)}>Follow</h4>
+                <h4 className={tw(`text-yellow-bright text-base font-ms-bold mb-1`)}>Follow</h4>
                 <ul>
                   {followLinks.map((link) => (
-                    <li className={tw(`text-white text-sm font-medium leading-6`)} key={link.label}>
+                    <li className={tw(`text-white text-sm font-ms-medium leading-6`)} key={link.label}>
                       <Link
                         key={`footer-main-${link.label}`} href={`${link.href}`} target={'_blank'}
-                        className={tw(`text-white text-sm font-medium leading-6 no-underline hover:text-yellow-bright`)}
+                        className={tw(`text-white text-sm font-ms-medium leading-6 no-underline hover:text-yellow-bright`)}
+                        color={"inherit"}
+                        underline={'none'}
                       >
                         {f({id: link.label})}
                       </Link>
@@ -104,15 +103,17 @@ const Footer = () => {
                 </ul>
               </div>
             </li>
-            <li className={tw(`w-1/3 md:w-1/3 lg:w-1/3`)}>
+            <li className={tw(`w-1/3 md:w-1/3 lg:w-1/3 text-white`)}>
               <div>
-                <h4 className={tw(`text-white text-base font-bold mb-1`)}>Legal</h4>
+                <h4 className={tw(`text-yellow-bright text-base font-ms-bold mb-1`)}>Legal</h4>
                 <ul>
                   {aboutLinks.map((link) => (
-                    <li className={tw(`text-white text-sm font-medium leading-6`)} key={link.label}>
+                    <li className={tw(`text-white text-sm font-ms-medium leading-6`)} key={link.label}>
                       <Link
                         key={`footer-main-${link.label}`} href={`/${locale}${link.href}`}
-                        className={tw(`text-white text-sm font-medium leading-6 no-underline hover:text-yellow-bright`)}
+                        className={tw(`text-white text-sm font-ms-medium leading-6 no-underline hover:text-yellow-bright`)}
+                        color={"inherit"}
+                        underline={'none'}
                       >
                         {f({id: link.label})}
                       </Link>
@@ -123,10 +124,10 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className={tw(`w-full lg:w-1/6 mt-12 lg:mt-0`)} />
+        <div className={tw(`w-full lg:w-1/6 mt-12 lg:mt-0`)}/>
         <div className={tw(`w-full lg:w-1/3 mt-12 lg:mt-0`)}>
           <div className={tw(`border border-gray-400 rounded py-5 px-4`)}>
-            <h4 className={tw(`font-mono  text-white mb-4`)}>Subscribe our newsletter</h4>
+            <h4 className={tw(`font-ms-bold text-white mb-4`)}>Subscribe our newsletter</h4>
             <div className={tw(`flex w-full`)}>
               <input
                 aria-label="email address"

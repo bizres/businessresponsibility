@@ -18,9 +18,9 @@ const ListDetailSection = () => {
             console.log(">> company: ", company);
             return (
               <>
-                <h1 className={tw(`text-3xl font-bold text-blue-900`)}>{company.name}</h1>
+                <h1 className={tw(`text-3xl font-ms-semi-bold text-blue-900`)}>{company.name}</h1>
                 <p>
-                  <a href={`${company.url_fixed}`} className={tw(`font-bold text-blue-900 hover:text-blue-600`)}>
+                  <a href={`${company.url_fixed}`} className={tw(`font-ms-semi-bold text-blue-900 hover:text-blue-600`)}>
                     {`${company.url_fixed}`}
                   </a>
                 </p>
@@ -45,7 +45,7 @@ const ListDetailSection = () => {
                         </td>
                         <td className={tw(`text-left`)}>
                           <Link key={`report-link-${item.id}`} href={`${item.pdf_url}`}>
-                            <a className={tw(`font-bold text-blue-900 hover:text-blue-600`)}>PDF</a>
+                            <a className={tw(`font-ms-semi-bold text-blue-900 hover:text-blue-600`)}>PDF</a>
                           </Link>
                         </td>
                         {item.report_category_statuses.map((it, idx) => {
