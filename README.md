@@ -1,5 +1,7 @@
 # businessresponsibility: frontend / backend / workflow
 
+✨ For the project's background information and the thorough documentation, please visit our [GitHub organization page](https://github.com/bizres).
+
 ## Project summary
 
 The [businessresponsibility.ch](https://en.businessresponsibility.ch/) is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies.
@@ -15,7 +17,6 @@ The [businessresponsibility.ch](https://en.businessresponsibility.ch/) is a proj
 
 This repository contains all code and data for building the **frontend**, **backend** and **workflow services** of [businessresponsibility.ch](https://en.businessresponsibility.ch/) web platform.
 
-For the project's background information and the thorough documentation, please visit our [GitHub organization page](https://github.com/bizres).
 
 ## Building and running the development environment
 
