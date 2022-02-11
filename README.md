@@ -1,9 +1,17 @@
 # Business Responsibility
 
+## Project summary
 
-businessresponsibility.ch is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies.
+The [businessresponsibility.ch](https://en.businessresponsibility.ch/) is a project to strengthen transparency and democratic control over the human rights performance of Swiss companies.
 
-# Development environment
+## Repository information
+
+This repository contains all code and data for building the **frontend**, **backend** and **workflow services** of [businessresponsibility.ch](https://en.businessresponsibility.ch/) web platform.
+
+For the project's background information and the thorough documentation, please visit our [GitHub organization page](https://github.com/bizres).
+
+## Building and running the development environment
+
 Startup all development environment servers with docker-compose:
 
 ### Initial build first time
