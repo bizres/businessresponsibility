@@ -1,4 +1,4 @@
-# businessresponsibility: frontend / backend / worklow
+# businessresponsibility: frontend / backend / workflow
 
 ## Project summary
 
