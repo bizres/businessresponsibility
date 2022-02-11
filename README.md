@@ -8,6 +8,11 @@ The [businessresponsibility.ch](https://en.businessresponsibility.ch/) is a proj
 
 This repository contains all code and data for building the **frontend**, **backend** and **workflow services** of [businessresponsibility.ch](https://en.businessresponsibility.ch/) web platform.
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/5593131/153625662-bf233507-027a-4a49-af27-b34ec2894c77.png" height="600" />
+</p>
+
+
 For the project's background information and the thorough documentation, please visit our [GitHub organization page](https://github.com/bizres).
 
 ## Building and running the development environment
