@@ -15,7 +15,7 @@ const PdfOverlay = (props) => {
   const {formatMessage: f} = useIntl();
 
   // iframe causing content-restriction errors, since the data is coming from another domain
-  const mockPdfUrl = '/data/template_report.pdf'
+ // const mockPdfUrl = '/data/template_report.pdf'
 
   useEffect(() => {
     setOpen(props.openOverlay)
@@ -28,13 +28,13 @@ const PdfOverlay = (props) => {
       <DialogContent className={tw(`h-screen`)}>
         <div className={tw(`h-full border-2 border-rose-600`)}>
           <object
-            data={`${mockPdfUrl}`}
+            data={`${url}`}
             type="application/pdf"
             width="100%"
             height="100%"
           >
             <iframe
-              src={`${mockPdfUrl}`}
+              src={`${url}`}
               width="100%"
               height="100%"
             >

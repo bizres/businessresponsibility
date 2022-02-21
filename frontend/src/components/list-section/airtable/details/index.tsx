@@ -57,7 +57,7 @@ const ListDetailSection = () => {
   const {id} = router.query
   const {formatMessage: f} = useIntl();
 
-  const status = [`NLP_SocialConcerns`, `NLP_Corruption`, `NLP_Employee`, `NLP_Environment`, `NLP_HumanRights`];
+  const status = [`SocialConcerns`, `Corruption`, `Employee`, `Environment`, `HumanRights`];
   const [crawlResult, setCrawlResult] = useState([]);
   const [pdfOverlayUrl, setPdfOverlayUrl] = useState("");
   const [openPdfOverlay, setOpenPdfOverlay] = useState(false);
@@ -100,7 +100,6 @@ const ListDetailSection = () => {
   }
   const company = records[0]['fields']['CompanyName (from RP)'][0];
   const companyUrl = records[0]['fields']['CompanyURL (from RP)'][0];
-  const reportingYear = records[0]['fields']['Year (from RP)'][0];
   const size = '-';
   const sector = '-';
   let prevYear = null;
@@ -127,7 +126,6 @@ const ListDetailSection = () => {
               </a>
             </p>
             <ul className={tw(`list-none list-inside pt-4 text-gray-600`)}>
-              <li>{f({id: "Reporting year"})}: {`${reportingYear}`}</li>
               <li>{f({id: "Size"})} {`${size}`}</li>
               <li>{f({id: "Sector"})}: {`${sector}`}</li>
             </ul>
@@ -147,7 +145,10 @@ const ListDetailSection = () => {
               {records.map((record, i) => {
                 const item = record.fields;
                 const year = item['Year'];
-                const pdfUrl = item['GS link']
+                //const extractedId = item['ExtractedID'];
+                //const localPdfUrl = (extractedId !== "") ? `/data/report_data/pdf/${extractedId}.pdf` : item['GS link'];
+                const localPdfUrl = item['PDFURL'];
+                const pdfUrl = item['GS link'];
 
                 const previousYear = prevYear;
                 prevYear = year;
@@ -173,7 +174,7 @@ const ListDetailSection = () => {
                               className={tw(`text-2xl font-ms-regular text-gray-600`)}>{f({id: "Total status"})} {year}</span>
                             </td>
                             {status.map((it, idx) => {
-                              const bg = (item[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
+                              const bg = (item[it] === true) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
                               return (
                                 <td className={tw(`text-center`)} key={`td-${idx}`}>
                                   <div className={tw(`m-auto rounded-full  ${bg}`)}>&nbsp;</div>
@@ -193,7 +194,7 @@ const ListDetailSection = () => {
                               href={'javascript:void(0);'}
                               title={item['Title']}
                               target={"_self"}
-                              onClick={(e) => handleThumbnailClick(e, `${pdfUrl}`)}
+                              onClick={(e) => handleThumbnailClick(e, `${localPdfUrl}`)}
                             >
                               <div
                                 className={tw(`relative inline-block align-middle border border-solid border-gray-200 p-2 `)}>
@@ -221,7 +222,8 @@ const ListDetailSection = () => {
                         </Link>
                       </td>
                       {status.map((it, idx) => {
-                        const bg = (item[it] === `1`) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
+                        console.log(item, it, item[it]);
+                        const bg = (item[it] === true) ? `w-4 h-4 bg-yellow-dark` : `w-2 h-2 bg-gray-300`;
                         return (
                           <td className={tw(`text-center`)} key={`td-${idx}`}>
                             <div className={tw(`m-auto rounded-full  ${bg}`)}>&nbsp;</div>

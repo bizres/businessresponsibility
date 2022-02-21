@@ -2,10 +2,10 @@ import {tw} from 'twind';
 import {PieChart, Pie, Cell, ResponsiveContainer} from 'recharts';
 
 const data = [
-  {name: '136  Unternehmen berichten über einzelne Themen', value: 136},
-  {name: '89  Unternehmen berichten über einzelne Themen', value: 89},
-  {name: '528  Unternehmen haben keinen Bericht', value: 528},
-  {name: 'Für 143 Unternehmen ist der Berichtsstatus unbekannt', value: 143},
+  {name: '288  Unternehmen berichten über einzelne Themen', value: 288},
+  {name: '176  Unternehmen berichten über alle Themen', value: 176},
+  {name: '190  Unternehmen haben keinen Bericht', value: 190},
+  {name: 'Für 146 Unternehmen ist der Berichtsstatus unbekannt', value: 146},
 ];
 
 const COLORS = ['#FFE69AFF', '#f1b605', '#919191', '#c2c2c2'];
