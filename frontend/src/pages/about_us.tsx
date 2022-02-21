@@ -37,6 +37,11 @@ const team = [
     img: 'nick.jpg'
   },
   {
+    name: 'Johannes Hool',
+    title: 'Tech Developer',
+    img: 'johannes.jpg'
+  },
+  {
     name: 'Miguel Vazquez',
     title: 'Tech Developer',
     img: 'miguel.jpg'
